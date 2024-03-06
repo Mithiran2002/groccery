@@ -248,6 +248,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  nopsuite_carousel_slider:
+    dependency: "direct main"
+    description:
+      name: nopsuite_carousel_slider
+      sha256: "6a6ced5578bbc57f0cfd2614d65b653b5c09e8e218d21694f8b6c7775910deac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   path:
     dependency: transitive
     description:

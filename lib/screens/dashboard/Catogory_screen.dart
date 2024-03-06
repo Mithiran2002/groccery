@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -37,20 +38,24 @@ class _ListPage extends State<CategoryScreen> {
       throw Exception('Failed to load data');
     }
   }
- 
 
   @override
   void initState() {
     super.initState();
     fetchAlbum();
   }
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFFf7571b).withOpacity(0.1),
         appBar: AppBar(
-          title: const Center(child: Text("Catogories")),
+          backgroundColor: Color(0xFFf7571b).withOpacity(0.7),
+          title: const Center(
+              child: Text(
+            "Catogories",
+            style: TextStyle(color: Colors.white),
+          )),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Container(
@@ -79,58 +84,66 @@ class _ListPage extends State<CategoryScreen> {
           ),
         ),
         body: ListView.builder(
+          padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
           scrollDirection: Axis.vertical,
           itemCount: productDetails.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(9.0),
-              child: Container(
-                  height: 18.h,
-                  width: 70.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12.sp)),
-                      color: Colors.white,
-                      border:
-                          Border.all(color: Colors.black.withOpacity(0.1.sp))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 18.w,
-                          child:
-                              Image.network(productDetails[index].images!.first,fit: BoxFit.cover,),
+            return Container(
+                margin: EdgeInsets.only(bottom: 1.h),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(12.sp)),
+                    color: Colors.white,
+                    border:
+                        Border.all(color: Colors.black.withOpacity(0.1.sp))),
+                child: Padding(
+                  padding: EdgeInsets.all(10.sp),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 15.w,
+                        child: Image.network(
+                          productDetails[index].images!.first,
+                          fit: BoxFit.fill,
                         ),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 25.sp,),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                             productDetails[index].price!.toString(),
-                                style: TextStyle(
-                                    color: Colors.orange,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                productDetails[index].brand!,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13.sp),
-                              ),
-                              SizedBox(
-                                  width: 60.w,
-                                  child:  Text(
-                                   productDetails[index].description!,style: TextStyle(fontSize: 9.sp),
-                                  )),
-                            ],
+                      ),
+                      Gap(3.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            productDetails[index].brand!,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13.sp),
                           ),
-                        )
-                      ],
-                    ),
-                  )),
-            );
+                          Gap(0.5.h),
+                          SizedBox(
+                            width: 70.w,
+                            child: Text(
+                              productDetails[index].description!,
+                              style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.normal),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Gap(0.5.h),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'Rs ${productDetails[index].price!}',
+                              style: TextStyle(
+                                  color: Colors.orange,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ));
           },
         ));
   }

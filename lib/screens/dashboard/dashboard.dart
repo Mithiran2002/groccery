@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:groccery_app/screens/dashboard/Catogory_screen.dart';
+import 'package:groccery_app/screens/dashboard/home_page.dart';
+import 'package:groccery_app/screens/dashboard/catogory_screen.dart';
 import 'package:groccery_app/screens/dashboard/offerzone_screen.dart';
 
 
@@ -67,6 +68,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   Widget switchcaseFun() {
     switch (selectedIndex) {
+      case 0:
+        return const HomePage();
       case 1:
         return const CategoryScreen();
       case 2:
