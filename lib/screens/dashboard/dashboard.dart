@@ -69,7 +69,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget switchcaseFun() {
     switch (selectedIndex) {
       case 0:
-        return const HomePage();
+        return  HomePage();
       case 1:
         return const CategoryScreen();
       case 2:

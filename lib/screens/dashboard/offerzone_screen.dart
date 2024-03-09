@@ -195,7 +195,7 @@ class _OfferZoneScreenState extends State<OfferZoneScreen> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.sp)),
-                                color: Color(0xFFf6f6f6),
+                                color: const Color(0xFFf6f6f6),
                               ),
                               child: Image.network(photos[index].url)),
                           Positioned(
@@ -207,7 +207,7 @@ class _OfferZoneScreenState extends State<OfferZoneScreen> {
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(12.sp),
                                       bottomRight: Radius.circular(12.sp)),
-                                  color: Color(0xFFf7571b),
+                                  color: const Color(0xFFf7571b),
                                 ),
                                 child: const Align(
                                   alignment: Alignment.center,

@@ -1,34 +1,35 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomePageBanner extends StatelessWidget {
-  final String text;
   final String off;
-  final String order;
-  final String buttontxt;
+  final List<Color> colors;
   final String imageUrl;
+  final Color? positionedColor;
 
-  const HomePageBanner(
-      {super.key,
-      required this.text,
-      required this.off,
-      required this.order,
-      required this.buttontxt,
-      required this.imageUrl});
+  const HomePageBanner({
+    super.key,
+    required this.off,
+    required this.colors,
+    required this.imageUrl,
+    required this.positionedColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10.sp, right: 10.sp, left: 10.sp),
+      margin: EdgeInsets.symmetric(horizontal: 1.5.w),
+      padding: EdgeInsets.only(top: 10.sp, left: 10.sp),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
           color: const Color(0xFFffd89f),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.topRight,
-              colors: [Color(0xFFfff3d6), Color(0xFFffd89f)])),
+              colors: colors)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -40,18 +41,18 @@ class HomePageBanner extends StatelessWidget {
                 Text(
                   "Get up to",
                   style: TextStyle(
-                      fontSize: 12.sp,
+                      fontSize: 11.sp,
                       color: const Color(0xFF1c2440),
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  "25%0ff",
+                  off,
                   style: TextStyle(
-                      fontSize: 23.sp,
+                      fontSize: 21.sp,
                       color: const Color(0xFF1c2440),
                       fontWeight: FontWeight.bold),
                 ),
-                Text("on all food orders",
+                Text("On Oil food orders ",
                     style: TextStyle(
                         fontSize: 11.sp,
                         color: const Color(0xFF1c2440),
@@ -74,13 +75,31 @@ class HomePageBanner extends StatelessWidget {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                width: 30.w,
-                imageUrl:
-                    "https://freepngimg.com/download/food/139180-food-plate-fish-download-hd.png"),
+          const Spacer(),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.sp),
+            child: SizedBox(
+              width: 45.w,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 1.h,
+                    child: CircleAvatar(
+                      maxRadius: 15.h,
+                      backgroundColor: positionedColor,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fitWidth,
+                      width: 34.w,
+                      imageUrl: imageUrl,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),
