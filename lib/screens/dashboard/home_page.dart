@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   ];
   List<Map<String, dynamic>> popularDinein = [
     {
-      "title": "House of Common..",
+      "title": "House of common..",
       "description": "Italian|Continontal",
       "timing": "4.5|1km",
       "imgUrl":
@@ -105,24 +105,32 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> homebanner = [
     {
       "off": "25% Off",
+      "discript": "On Oil food order",
       "imgUrl":
           "https://www.pngkit.com/png/full/54-545849_dinner-food-png-freeuse-stock-plate-of-food.png",
-      "color": [Color(0xFFfff3d6), Color(0xFFffd89f)],
-      "positionedColor": Color(0xFFffebcd),
+      "color": [const Color(0xFFfff3d6), const Color(0xFFffd89f)],
+      "positionedColor": const Color(0xFFffebcd),
     },
     {
       "off": "30% Off",
-      "imgUrl":
-          "https://www.pngall.com/wp-content/uploads/4/Grocery-PNG-HD-Quality.png",
-      "color": [Color(0xFFF7BAC5).withOpacity(0.1), Color(0xFFF7BAC5)],
-      "positionedColor": Color(0xFFF7BAC5).withOpacity(0.5),
+      "discript": "Let's Start Order",
+      "imgUrl": "https://www.pngmart.com/files/7/Groceries-PNG-HD.png",
+      "color": [
+        const Color(0xFFF7BAC5).withOpacity(0.1),
+        const Color(0xFFF7BAC5)
+      ],
+      "positionedColor": const Color(0xFFF7BAC5).withOpacity(0.5),
     },
     {
       "off": "35% Off",
+      "discript": "All Brands available",
       "imgUrl":
           "https://media.croma.com/image/upload/v1662703724/Croma%20Assets/Communication/Mobiles/Images/261934_qgssvy.png",
-      "color": [Color(0xFFCFAEF4).withOpacity(0.1), Color(0xFFCFAEF4)],
-      "positionedColor": Color(0xFFCFAEF4).withOpacity(0.1),
+      "color": [
+        const Color(0xFFCFAEF4).withOpacity(0.2),
+        const Color(0xFFCFAEF4)
+      ],
+      "positionedColor": const Color(0xFFDDBEFF),
     }
   ];
 
@@ -212,9 +220,11 @@ class _HomePageState extends State<HomePage> {
                   off: homebanner[index]["off"],
                   imageUrl: homebanner[index]["imgUrl"],
                   positionedColor: homebanner[index]["positionedColor"],
+                  discript: homebanner[index]["discript"],
                 );
               },
               options: CarouselOptions(
+                autoPlayCurve: Curves.easeInOutCubic,
                 height: 18.h,
                 viewportFraction: 0.95,
                 initialPage: 0,

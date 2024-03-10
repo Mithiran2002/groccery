@@ -9,6 +9,7 @@ class HomePageBanner extends StatelessWidget {
   final List<Color> colors;
   final String imageUrl;
   final Color? positionedColor;
+  final String discript;
 
   const HomePageBanner({
     super.key,
@@ -16,6 +17,7 @@ class HomePageBanner extends StatelessWidget {
     required this.colors,
     required this.imageUrl,
     required this.positionedColor,
+    required this.discript,
   });
 
   @override
@@ -52,7 +54,7 @@ class HomePageBanner extends StatelessWidget {
                       color: const Color(0xFF1c2440),
                       fontWeight: FontWeight.bold),
                 ),
-                Text("On Oil food orders ",
+                Text(discript,
                     style: TextStyle(
                         fontSize: 11.sp,
                         color: const Color(0xFF1c2440),
@@ -83,7 +85,7 @@ class HomePageBanner extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 1.h,
+                    top: 0.9.h,
                     child: CircleAvatar(
                       maxRadius: 15.h,
                       backgroundColor: positionedColor,
