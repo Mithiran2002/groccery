@@ -3,8 +3,10 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:groccery_app/widget/header_widget.dart';
 import 'package:groccery_app/widget/category_card.dart';
 import 'package:groccery_app/widget/popular_section.dart';
+import 'package:groccery_app/widget/searchbar_widget.dart';
 import 'package:groccery_app/widget/home_page_banner.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -144,12 +146,12 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding:
                   EdgeInsets.only(left: 3.w, right: 3.w, top: 3.h, bottom: 1.h),
-              child: header(),
+              child: HeaderWidget(),
             ),
             Gap(2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
-              child: searchBar(),
+              child: const SearchbarWidget(),
             ),
             Gap(2.h),
             Padding(
@@ -205,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                       title: "Gold membership",
                       timing: "Free delivery can all order",
                       imageUrl:
-                          "https://lyfas.com/wp-content/uploads/2022/10/Lyfas-Gold-Membership.png",
+                          "https://images.jdmagicbox.com/quickquotes/images_main/membership-card-2021435511-nvsf8jk6.png",
                     ),
                   ),
                 ],
@@ -272,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: popularData.length,
                 itemBuilder: (context, index) => PopularSection(
-                  salaar: true,
+                  salaar: true,                 
                   title: popularData[index]["title"],
                   description: popularData[index]["description"],
                   timing: popularData[index]["timing"],
@@ -368,76 +370,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       )),
-    );
-  }
-
-  Widget header() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Deliver Now",
-              style: TextStyle(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Row(
-              children: [
-                Text(
-                  "Hsr Layout",
-                  style:
-                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w900),
-                ),
-                Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                  size: 20.sp,
-                ),
-              ],
-            ),
-          ],
-        ),
-        CircleAvatar(
-          maxRadius: 20.sp,
-          backgroundColor: const Color(0xFFf0f0f1),
-          child: const Icon(Icons.person_2_outlined),
-        )
-      ],
-    );
-  }
-
-  Widget searchBar() {
-    return SearchBar(
-      shadowColor: const MaterialStatePropertyAll(Color(0xFFf0f0f1)),
-      elevation: const MaterialStatePropertyAll(1),
-      trailing: <Widget>[
-        Icon(
-          Icons.mic_outlined,
-          size: 18.sp,
-          color: Colors.black,
-        ),
-        SizedBox(
-          height: 2.5.h,
-          child: const VerticalDivider(
-            color: Colors.grey,
-          ),
-        ),
-        Icon(
-          Icons.filter_list_rounded,
-          size: 18.sp,
-          color: Colors.black,
-        )
-      ],
-      backgroundColor: const MaterialStatePropertyAll(Color(0xFFf0f0f1)),
-      hintText: "Search for food,grocery,etc",
-      hintStyle: MaterialStatePropertyAll(TextStyle(
-          fontWeight: FontWeight.w600, color: Colors.grey, fontSize: 11.sp)),
-      leading: Icon(
-        Icons.search_outlined,
-        size: 18.sp,
-        color: Colors.black,
-      ),
     );
   }
 }

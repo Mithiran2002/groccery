@@ -1,16 +1,18 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class PopularSection extends StatelessWidget {
   final String title;
+  final String? rating;
   final String description;
   final bool salaar;
   final Icon favouriteIcon;
   final String? timing;
+  final bool rrr;
   final String imgUrl;
+  final String? exploreTimings;
 
   const PopularSection({
     required this.salaar,
@@ -20,6 +22,9 @@ class PopularSection extends StatelessWidget {
     required this.favouriteIcon,
     required this.imgUrl,
     this.timing,
+    this.exploreTimings,
+    this.rating,
+    this.rrr = true,
   });
 
   @override
@@ -39,13 +44,21 @@ class PopularSection extends StatelessWidget {
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
                     height: 23.h,
-                    width: salaar == true ? 46.w : 40.w,
+                    width: (salaar == true && rrr != true)
+                        ? 100.w
+                        : salaar == true
+                            ? 46.w
+                            : 40.w,
                     imageUrl: imgUrl,
                   ),
                 ),
               ),
               Positioned(
-                  left: salaar == true ? 35.w : 28.w,
+                  left: (salaar == true && rrr != true)
+                      ? 80.w
+                      : salaar == true
+                          ? 35.w
+                          : 28.w,
                   top: 1.h,
                   child: CircleAvatar(
                       maxRadius: 12.sp,
@@ -66,32 +79,75 @@ class PopularSection extends StatelessWidget {
             ],
           ),
           Gap(1.h),
-          SizedBox(
-            width: 40.w,
-            child: Text(
-              title,
-              maxLines: salaar == true ? 1 : 2,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold),
+          if (salaar == true && rrr != true)
+            Row(
+              children: [
+                Text(
+                  title,
+                  maxLines: salaar == true ? 1 : 2,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.star,
+                  size: 17.sp,
+                  color: Colors.yellow,
+                ),
+                Gap(1.w),
+                Text(
+                  rating ?? '',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            width: 45.w,
-            child: Text(
-              description,
-              maxLines: 1,
-              softWrap: false,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 12.sp,
-                fontWeight: salaar == false ? FontWeight.bold : FontWeight.w500,
+          if ((salaar == true && rrr == true) || salaar == false)
+            SizedBox(
+              width: 40.w,
+              child: Text(
+                title,
+                maxLines: salaar == true ? 1 : 2,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold),
               ),
             ),
+          Row(
+            children: [
+              SizedBox(
+                width: (salaar == true && rrr != true) ? 55.w : 45.w,
+                child: Text(
+                  description,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.sp,
+                    fontWeight:
+                        salaar == false ? FontWeight.bold : FontWeight.w500,
+                  ),
+                ),
+              ),
+              if (salaar == true && rrr != true) Spacer(),
+              if (salaar == true && rrr != true)
+                Text(
+                  exploreTimings ?? '',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12.sp,
+                    fontWeight:
+                        salaar == false ? FontWeight.bold : FontWeight.w500,
+                  ),
+                ),
+            ],
           ),
-          if (salaar == true)
+          if (salaar == true && (salaar == true && rrr == true))
             Row(
               children: [
                 Icon(

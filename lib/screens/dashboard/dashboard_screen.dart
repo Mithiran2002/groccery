@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:groccery_app/screens/dashboard/home_page.dart';
-import 'package:groccery_app/screens/dashboard/catogory_screen.dart';
-import 'package:groccery_app/screens/dashboard/offerzone_screen.dart';
-
-
-
+import 'package:groccery_app/screens/dashboard/food_page.dart';
+import 'package:groccery_app/screens/dashboard/mart_page.dart';
+import 'package:groccery_app/screens/dashboard/offerzone_page.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -23,10 +21,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ),
     ),
     const Center(
-      child: Text("Catogories"),
+      child: Text("Food Page"),
     ),
     const Center(
-      child: Text("Search"),
+      child: Text("Mart"),
     ),
     const Center(
       child: Text("offers"),
@@ -46,11 +44,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_rounded),
-            label: "Catogories",
+            icon: Icon(Icons.restaurant_menu_outlined),
+            label: "food Page",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search_rounded), label: "Search"),
+              icon: Icon(Icons.local_grocery_store_outlined), label: "Mart"),
           BottomNavigationBarItem(
               icon: Icon(Icons.card_giftcard), label: "offers"),
           BottomNavigationBarItem(
@@ -69,13 +67,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget switchcaseFun() {
     switch (selectedIndex) {
       case 0:
-        return  HomePage();
+        return HomePage();
       case 1:
-        return const CategoryScreen();
+        return const FoodPage();
       case 2:
-        return const Center(
-          child: Text("hi"),
-        );
+        return MartPage();
       case 3:
         return const OfferZoneScreen();
       default:

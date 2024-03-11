@@ -1,7 +1,7 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/screens/dashboard/dashboard.dart';
 import 'package:splash_view/source/presentation/presentation.dart';
+import 'package:groccery_app/screens/dashboard/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
