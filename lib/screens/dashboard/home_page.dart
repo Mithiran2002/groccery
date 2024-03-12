@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding:
                   EdgeInsets.only(left: 3.w, right: 3.w, top: 3.h, bottom: 1.h),
-              child: HeaderWidget(),
+              child: const HeaderWidget(),
             ),
             Gap(2.h),
             Padding(
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisCellCount: 1.2,
                     child: CategoryCard(
                       title: "Mart",
-                      timing: "20 mins",
+                      timing: "25 mins",
                       imageUrl:
                           "https://www.pngplay.com/wp-content/uploads/7/Grocery-Transparent-PNG.png",
                     ),
@@ -223,6 +223,7 @@ class _HomePageState extends State<HomePage> {
                   imageUrl: homebanner[index]["imgUrl"],
                   positionedColor: homebanner[index]["positionedColor"],
                   discript: homebanner[index]["discript"],
+                  kanmani: false,
                 );
               },
               options: CarouselOptions(
@@ -274,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: popularData.length,
                 itemBuilder: (context, index) => PopularSection(
-                  salaar: true,                 
+                  salaar: true,
                   title: popularData[index]["title"],
                   description: popularData[index]["description"],
                   timing: popularData[index]["timing"],

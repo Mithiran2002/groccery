@@ -141,6 +141,7 @@ class _ListPage extends State<FoodPage> {
           "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-biryani-awadhi-01.jpg",
     }
   ];
+   
 
   int currentIndex = 0;
 
@@ -249,6 +250,7 @@ class _ListPage extends State<FoodPage> {
                     imageUrl: homebanner[index]["imgUrl"],
                     positionedColor: homebanner[index]["positionedColor"],
                     discript: homebanner[index]["discript"],
+                     kanmani: false,
                   );
                 },
                 options: CarouselOptions(

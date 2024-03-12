@@ -9,6 +9,7 @@ class HomePageBanner extends StatelessWidget {
   final List<Color> colors;
   final String imageUrl;
   final Color? positionedColor;
+  final bool kanmani;
   final String discript;
 
   const HomePageBanner({
@@ -18,6 +19,7 @@ class HomePageBanner extends StatelessWidget {
     required this.imageUrl,
     required this.positionedColor,
     required this.discript,
+     required this.kanmani,
   });
 
   @override
@@ -36,10 +38,11 @@ class HomePageBanner extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 1.h),
+            padding: kanmani == true ? EdgeInsets.only(top: 13.sp) :EdgeInsets.only(bottom: 1.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if(kanmani != true)
                 Text(
                   "Get up to",
                   style: TextStyle(

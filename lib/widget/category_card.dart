@@ -5,14 +5,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class CategoryCard extends StatelessWidget {
   final String title;
-  final String timing;
+  final String? timing;
   final String imageUrl;
+  final bool pushpa;
 
   const CategoryCard(
       {super.key,
       required this.title,
-      required this.timing,
-      required this.imageUrl});
+      this.timing,
+      required this.imageUrl,
+      this.pushpa = true});
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +38,22 @@ class CategoryCard extends StatelessWidget {
                 fontWeight: FontWeight.w800,
                 color: Colors.black),
           ),
-          Text(
-            timing,
-            style: TextStyle(
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey),
-          ),
-          Gap(2.h),
+          if (pushpa == true)
+            Text(
+              timing ?? "",
+              style: TextStyle(
+                  fontSize: 11.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey),
+            ),
+          pushpa == true ? Gap(2.h) : Gap(1.h),
           Align(
             alignment: Alignment.bottomRight,
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               fit: BoxFit.fitWidth,
               width: 18.w,
-              height: 8.h,
+              height: 7.h,
             ),
           )
         ],

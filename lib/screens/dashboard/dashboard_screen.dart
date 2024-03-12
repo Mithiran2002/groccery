@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:groccery_app/screens/dashboard/home_page.dart';
 import 'package:groccery_app/screens/dashboard/food_page.dart';
 import 'package:groccery_app/screens/dashboard/mart_page.dart';
-import 'package:groccery_app/screens/dashboard/offerzone_page.dart';
+import 'package:groccery_app/screens/dashboard/dinein_page.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -50,7 +50,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.local_grocery_store_outlined), label: "Mart"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.card_giftcard), label: "offers"),
+              icon: Icon(Icons.dining_outlined), label: "Dine in"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_3_outlined), label: "Account"),
         ],
@@ -73,7 +73,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       case 2:
         return MartPage();
       case 3:
-        return const OfferZoneScreen();
+        return const DineInPage();
       default:
         return Container();
     }
