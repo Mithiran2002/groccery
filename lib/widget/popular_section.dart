@@ -13,6 +13,9 @@ class PopularSection extends StatelessWidget {
   final bool rrr;
   final String imgUrl;
   final String? exploreTimings;
+  final bool kgf;
+  final String? layout;
+  final String? amount;
 
   const PopularSection({
     required this.salaar,
@@ -25,6 +28,9 @@ class PopularSection extends StatelessWidget {
     this.exploreTimings,
     this.rating,
     this.rrr = true,
+    this.layout,
+    this.amount,
+    this.kgf = true,
   });
 
   @override
@@ -134,7 +140,7 @@ class PopularSection extends StatelessWidget {
                   ),
                 ),
               ),
-              if (salaar == true && rrr != true) Spacer(),
+              if (salaar == true && rrr != true) const Spacer(),
               if (salaar == true && rrr != true)
                 Text(
                   exploreTimings ?? '',
@@ -147,6 +153,36 @@ class PopularSection extends StatelessWidget {
                 ),
             ],
           ),
+          if (kgf != true)
+            Row(
+              children: [
+                SizedBox(
+                  width: (salaar == true && rrr != true) ? 55.w : 45.w,
+                  child: Text(
+                    layout ?? "",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 11.sp,
+                      fontWeight:
+                          salaar == false ? FontWeight.bold : FontWeight.w500,
+                    ),
+                  ),
+                ),
+                if (salaar == true && rrr != true) const Spacer(),
+                if (salaar == true && rrr != true)
+                  Text(
+                    amount ?? '',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12.sp,
+                      fontWeight:
+                          salaar == false ? FontWeight.bold : FontWeight.w500,
+                    ),
+                  ),
+              ],
+            ),
           if (salaar == true && (salaar == true && rrr == true))
             Row(
               children: [

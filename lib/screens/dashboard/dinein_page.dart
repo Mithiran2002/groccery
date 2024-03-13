@@ -3,6 +3,9 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:groccery_app/widget/dinein_banne.dart';
 import 'package:groccery_app/widget/places_Widget.dart';
 import 'package:groccery_app/widget/dinein_widget.dart';
 import 'package:groccery_app/widget/header_widget.dart';
@@ -91,6 +94,8 @@ List<Map<String, dynamic>> popularData = [
     "description": "North indian|Contenantial",
     "timing": "4.5|4km|30 MIns",
     "exploretiming": "3.5|1km|25 min",
+    "layout": "BTM Layout",
+    "amount": "10,000",
     "imgUrl":
         "https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   },
@@ -98,6 +103,8 @@ List<Map<String, dynamic>> popularData = [
     "title": "Luxury Hotel",
     "description": "Indian|Contenantial",
     "timing": "4.6|5km|35 MIns",
+    "layout": "karmangala",
+    "amount": "1500 for two",
     "exploretiming": "3.7|1km|27 min",
     "imgUrl":
         "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202109/PG-24-25-Spice-September-2021-.jpg?size=690:388",
@@ -106,6 +113,8 @@ List<Map<String, dynamic>> popularData = [
     "title": "Royal Rooms Here",
     "description": "Indian|Contenantial",
     "timing": "4.3|3km|25 MIns",
+    "layout": "2 BHK",
+    "amount": "15,000 for Rent",
     "exploretiming": "4.2|1km|29 min",
     "imgUrl":
         "https://www.travelplusstyle.com/wp-content/uploads/2016/01/sonevajani-1880.jpg",
@@ -114,11 +123,40 @@ List<Map<String, dynamic>> popularData = [
     "title": "Luxury Budget Rooms",
     "description": " North Indian|Contenantial",
     "timing": "4.5|2km|30 MIns",
+    "layout": "1 BHK with food",
+    "amount": "18,000 for two",
     "exploretiming": "3.2|1km|27 min",
     "imgUrl":
         "https://www.jaypeehotels.com/webroot/uploads/jaypee-luxery-hotel-in-delhi/assets/images/banner-js1.jpg",
   }
 ];
+List<Map<String, dynamic>> banner = [
+  {
+    "title": "Flat",
+    "offer": "50%Off",
+    "disc": "at BLR Brewing co",
+    "button": "Book a Table",
+    "imgUrl":
+        "https://www.vivantahotels.com/content/dam/vivanta/hotels/VBT-Dal_View_Srinagar/images/Quick_Peek/LOBBY%20final%20w.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+  },
+  {
+    "title": "Flat",
+    "offer": "50%Off",
+    "disc": "at BLR Brewing co",
+    "button": "Book a Table",
+    "imgUrl":
+        "https://www.new-delhi-hotels.com/blog/wp-content/uploads/2012/12/Hotels-New-Delhi.jpg",
+  },
+  {
+    "title": "Flat",
+    "offer": "50%Off",
+    "disc": "at BLR Brewing co",
+    "button": "Book a Table",
+    "imgUrl":
+        "https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2019/07/THE-TAJ-MAHAL-PALACE-MUMBAI.jpg?ssl=1",
+  },
+];
+int currentIndex = 0;
 
 class _DineInPageState extends State<DineInPage> {
   @override
@@ -153,68 +191,44 @@ class _DineInPageState extends State<DineInPage> {
                       );
                     }),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                margin: EdgeInsets.only(left: 10.sp, right: 10.sp),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black,
-                          Colors.black,
-                        ]),
-                    borderRadius: BorderRadius.circular(10.sp),
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                            "https://assets.architecturaldigest.in/photos/600835aed3054f83c2ded41f/16:9/w_1360,h_765,c_limit/Tre%CC%80sind-Inspire-BKC-Mumbai-main-1366x768.jpg"))),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.sp),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Flat",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "50%Off",
-                          style: TextStyle(
-                              fontSize: 21.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text("Of BLR Brewing Co",
-                            style: TextStyle(
-                                fontSize: 11.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500)),
-                        Gap(1.h),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.sp),
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.w, vertical: 0.5.h),
-                            child: Text(
-                              "Book a Table",
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 12.sp),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+              Gap(1.h),
+              CarouselSlider.builder(
+                itemCount: banner.length,
+                itemBuilder: (context, index, realIndex) {
+                  return DineinBanner(
+                    title: banner[index]["title"],
+                    offer: banner[index]["offer"],
+                    disc: banner[index]["disc"],
+                    button: banner[index]["button"],
+                    imgUrl: banner[index]["imgUrl"],
+                  );
+                },
+                options: CarouselOptions(
+                  autoPlayCurve: Curves.easeInOutCubic,
+                  height: 18.h,
+                  viewportFraction: 0.95,
+                  initialPage: 0,
+                  autoPlay: true,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
                 ),
+              ),
+              Gap(1.h),
+              DotsIndicator(
+                decorator: DotsDecorator(
+                    spacing: EdgeInsets.only(right: 5.sp),
+                    activeColor: const Color(0xFF1c2440),
+                    activeShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.sp)),
+                    size: Size(5.sp, 3.sp),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.sp)),
+                    activeSize: Size(15.sp, 4.sp)),
+                dotsCount: 3,
+                position: currentIndex,
               ),
               Gap(2.h),
               Padding(
@@ -263,9 +277,12 @@ class _DineInPageState extends State<DineInPage> {
                   child: PopularSection(
                     salaar: true,
                     rrr: false,
+                    kgf: false,
                     rating: '4.1',
                     exploreTimings: popularData[index]["exploretiming"],
                     title: popularData[index]["title"],
+                    amount: popularData[index]["amount"],
+                    layout: popularData[index]["layout"],
                     description: popularData[index]["description"],
                     timing: popularData[index]["timing"],
                     imgUrl: popularData[index]["imgUrl"],

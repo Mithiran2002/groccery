@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -29,10 +28,23 @@ class PlacesWidget extends StatelessWidget {
       ),
       child: Stack(
         children: [
+          SizedBox(
+            height: 25.h,
+            width: double.infinity,
+            child: DecoratedBox(
+                decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.sp),
+              gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topLeft,
+                  colors: [
+                    Colors.black.withOpacity(0.5),
+                    Colors.black.withOpacity(0.1),
+                  ]),
+            )),
+          ),
           Padding(
-            padding: EdgeInsets.only(
-              left: 10.sp,
-            ),
+            padding: EdgeInsets.only(left: 10.sp, top: 17.h),
             child: Text(
               first,
               style: TextStyle(
@@ -42,27 +54,12 @@ class PlacesWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10.sp, bottom: 5.sp),
+            padding: EdgeInsets.only(left: 10.sp, bottom: 5.sp, top: 19.h),
             child: Text(secound,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w600)),
-          ),
-          SizedBox(
-            height: 25.h,
-            width: double.infinity,
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.sp),
-              gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.topLeft,
-                  colors: [
-                    Colors.black.withOpacity(0.4),
-                    Colors.black.withOpacity(0.5),
-                  ]),
-            )),
           ),
         ],
       ),

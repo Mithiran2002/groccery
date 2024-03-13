@@ -1,5 +1,7 @@
+import 'package:sizer/sizer.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 const purple = Color(0xFF6d276d);
 
@@ -11,5 +13,7 @@ var logger = Logger(
       colors: true, // Colorful log messages
       printEmojis: true, // Print an emoji for each log message
       printTime: false // Should each log print contain a timestamp
-  ),
+      ),
 );
+
+     

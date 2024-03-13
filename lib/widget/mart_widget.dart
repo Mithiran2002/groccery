@@ -23,8 +23,8 @@ class MartWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.sp),
         child: CachedNetworkImage(
           fit: BoxFit.fitWidth,
-          height: 10.h,
-          width: 23.w,
+          height: 13.h,
+          width: 25.w,
           imageUrl: imgUrl,
         ),
       ),

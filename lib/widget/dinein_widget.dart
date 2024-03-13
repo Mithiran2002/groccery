@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -17,12 +16,15 @@ class DineInWidget extends StatelessWidget {
         CircleAvatar(
           backgroundColor: Colors.grey,
           backgroundImage: CachedNetworkImageProvider(imgUrl),
-          maxRadius: 19.sp,
+          radius: 25.sp,
         ),
-        Gap(1.5.h),
+        Gap(1.h),
         Text(
           title,
-          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.black),
         ),
       ],
     );

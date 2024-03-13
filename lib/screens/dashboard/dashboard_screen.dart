@@ -3,6 +3,7 @@ import 'package:groccery_app/screens/dashboard/home_page.dart';
 import 'package:groccery_app/screens/dashboard/food_page.dart';
 import 'package:groccery_app/screens/dashboard/mart_page.dart';
 import 'package:groccery_app/screens/dashboard/dinein_page.dart';
+import 'package:groccery_app/screens/dashboard/courier_page.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -52,7 +53,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.dining_outlined), label: "Dine in"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_3_outlined), label: "Account"),
+              icon: Icon(Icons.delivery_dining_outlined), label: "Courier"),
         ],
         onTap: (index) {
           setState(() {
@@ -74,6 +75,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         return MartPage();
       case 3:
         return const DineInPage();
+      case 4:
+        return CourierPage();
       default:
         return Container();
     }

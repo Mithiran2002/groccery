@@ -261,7 +261,7 @@ class _MartPageState extends State<MartPage> {
                           fontWeight: FontWeight.w900,
                           color: Colors.black),
                     ),
-                    Spacer(),
+                     const Spacer(),
                     Text(
                       "78 Stores",
                       style: TextStyle(
