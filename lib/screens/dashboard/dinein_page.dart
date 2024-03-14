@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:groccery_app/widget/dinein_banne.dart';
+import 'package:groccery_app/widget/dinein_banner.dart';
 import 'package:groccery_app/widget/places_Widget.dart';
 import 'package:groccery_app/widget/dinein_widget.dart';
 import 'package:groccery_app/widget/header_widget.dart';

@@ -1,6 +1,8 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:groccery_app/widget/inputform_field.dart';
+import 'package:groccery_app/screens/dashboard/cart_page.dart';
 
 class CourierPage extends StatefulWidget {
   const CourierPage({super.key});
@@ -10,6 +12,15 @@ class CourierPage extends StatefulWidget {
 }
 
 class CourierPageState extends State<CourierPage> {
+  bool? ischecked = true;
+  List<String> text = [
+    "Food Items",
+    "Medicines",
+    "Electronic Items",
+    "Documents|Books",
+    "Cloths|Accessories",
+    "Others",
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +45,7 @@ class CourierPageState extends State<CourierPage> {
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
                 Gap(1.h),
-                TextFormField(decoration: const InputDecoration(hintText: "")),
+                InputFormField(title: "Enter pickup location"),
                 Gap(3.h),
                 Text(
                   "Delivery address",
@@ -42,9 +53,7 @@ class CourierPageState extends State<CourierPage> {
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
                 Gap(1.h),
-                TextFormField(
-                  decoration: const InputDecoration(),
-                ),
+                InputFormField(title: "Enter Deivery Location"),
                 Gap(3.h),
                 Text(
                   "Parcel Type",
@@ -52,42 +61,86 @@ class CourierPageState extends State<CourierPage> {
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
                 Gap(1.h),
-                TextFormField(
+                InputFormField(
+                  readonly: true,
                   onTap: () {
-                    setState(() {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (Context) {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (Context) {
+                          return StatefulBuilder(builder: (context, setState) {
                             return Container(
-                              height: 40.h,
-                              color: Colors.white,
+                              height: 46.h,
+                              width: 100.h,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12.sp),
+                                      topLeft: Radius.circular(12.sp))),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5.w, vertical: 2.h),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Select Parcel Type",
+                                        style: TextStyle(
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.black)),
+                                    SizedBox(
+                                      height: 35.h,
+                                      child: ListView(
+                                        children: text
+                                            .map(
+                                              (text) => CheckboxListTile(
+                                                  controlAffinity:
+                                                      ListTileControlAffinity
+                                                          .leading,
+                                                  checkboxShape:
+                                                      RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      3.sp),
+                                                          side:
+                                                              const BorderSide(
+                                                                  color: Colors
+                                                                      .black)),
+                                                  title: Text(
+                                                    text,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 15.sp),
+                                                  ),
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      const Color(0xFFe6470a),
+                                                  tristate: true,
+                                                  value: ischecked,
+                                                  onChanged: (bool? newValue) {
+                                                    ischecked = newValue;
+                                                    setState(
+                                                      () {},
+                                                    );
+                                                  }),
+                                            )
+                                            .toList(),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             );
                           });
-                    });
+                        });
                   },
-                  keyboardType: TextInputType.none,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 5.sp),
-                      hintText: "",
-                      filled: true,
-                      suffixIcon: Icon(Icons.keyboard_arrow_down_outlined),
-                      fillColor: Color(0xFFf0f0f1),
-                      border: InputBorder.none,
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(6.sp)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(6.sp)),
-                      hintStyle: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
-                          color: Colors.grey)),
+                  title: 'Select Type Of Parcel',
+                  suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
                 ),
                 Gap(5.h),
-                // TextFormField(
-                //   decoration:
-                // ),
+                InputFormField(title: "Any Instruction for parcel (optional)"),
                 Gap(3.h),
                 const Divider(),
                 Gap(2.h),
@@ -100,29 +153,29 @@ class CourierPageState extends State<CourierPage> {
                 ),
                 Gap(1.h),
                 Text(
-                  "•   No illegal & hazorclous items ",
+                  "     •   No illegal & hazorclous items ",
                   style: TextStyle(
-                      fontSize: 11.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       color: Colors.grey),
                 ),
                 Gap(1.h),
                 Text(
-                  "•  High Value & Frogile items not reccommended ",
+                  "     •  High Value & Frogile items not reccommended ",
                   style: TextStyle(
-                      fontSize: 11.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       color: Colors.grey),
                 ),
                 Gap(1.h),
                 Text(
-                  "•  Select Type of parcel ",
+                  "     •  Select Type of parcel ",
                   style: TextStyle(
-                      fontSize: 11.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       color: Colors.grey),
                 ),
-                Gap(5.h),
+                Gap(7.h),
                 Align(
                   alignment: Alignment.center,
                   child: ElevatedButton(
@@ -134,12 +187,17 @@ class CourierPageState extends State<CourierPage> {
                               MaterialStatePropertyAll(Size(90.w, 6.h)),
                           backgroundColor: const MaterialStatePropertyAll(
                               Color(0xFFe6470a))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CartPage()));
+                      },
                       child: Text(
                         "Continue",
                         style: TextStyle(color: Colors.white, fontSize: 13.sp),
                       )),
-                )
+                ),
               ],
             ),
           ),

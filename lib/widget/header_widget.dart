@@ -1,6 +1,8 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:groccery_app/screens/dashboard/profile_page.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -33,10 +35,16 @@ class HeaderWidget extends StatelessWidget {
             ),
           ],
         ),
-        CircleAvatar(
-          maxRadius: 20.sp,
-          backgroundColor: const Color(0xFFf0f0f1),
-          child: const Icon(Icons.person_2_outlined),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
+          },
+          child: CircleAvatar(
+            maxRadius: 20.sp,
+            backgroundColor: const Color(0xFFf0f0f1),
+            child: const Icon(Icons.person_2_outlined),
+          ),
         )
       ],
     );
