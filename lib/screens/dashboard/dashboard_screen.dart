@@ -6,14 +6,15 @@ import 'package:groccery_app/screens/dashboard/dinein_page.dart';
 import 'package:groccery_app/screens/dashboard/courier_page.dart';
 
 class DashBoardScreen extends StatefulWidget {
-  const DashBoardScreen({super.key});
+  final int? index;
+  const DashBoardScreen(this.index);
 
   @override
   State<DashBoardScreen> createState() => _DashBoardScreenState();
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  int selectedIndex = 0;
+  late int selectedIndex;
   List<Widget> pageContent = [
     Center(
       child: Container(
@@ -35,9 +36,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     ),
   ];
   @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.index ?? 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         currentIndex: selectedIndex,
@@ -53,7 +61,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.dining_outlined), label: "Dine in"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.delivery_dining_outlined), label: "Courier"),
+            icon: Icon(Icons.delivery_dining_outlined),
+            label: "Delivery",
+          ),
         ],
         onTap: (index) {
           setState(() {

@@ -1,6 +1,7 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:groccery_app/widget/custom_button.dart';
 import 'package:groccery_app/widget/inputform_field.dart';
 import 'package:groccery_app/screens/dashboard/cart_page.dart';
 
@@ -143,7 +144,7 @@ class CourierPageState extends State<CourierPage> {
                 InputFormField(title: "Any Instruction for parcel (optional)"),
                 Gap(3.h),
                 const Divider(),
-                Gap(2.h),
+                Gap(2.5.h),
                 Text(
                   "Note:",
                   style: TextStyle(
@@ -175,29 +176,13 @@ class CourierPageState extends State<CourierPage> {
                       fontWeight: FontWeight.w400,
                       color: Colors.grey),
                 ),
-                Gap(7.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.sp))),
-                          minimumSize:
-                              MaterialStatePropertyAll(Size(90.w, 6.h)),
-                          backgroundColor: const MaterialStatePropertyAll(
-                              Color(0xFFe6470a))),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CartPage()));
-                      },
-                      child: Text(
-                        "Continue",
-                        style: TextStyle(color: Colors.white, fontSize: 13.sp),
-                      )),
-                ),
+                Gap(8.h),
+                CustomButton(
+                    text: "Continue",
+                    onTab: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => CartPage()));
+                    })
               ],
             ),
           ),

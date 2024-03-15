@@ -8,6 +8,9 @@ import 'package:groccery_app/widget/category_card.dart';
 import 'package:groccery_app/widget/popular_section.dart';
 import 'package:groccery_app/widget/searchbar_widget.dart';
 import 'package:groccery_app/widget/home_page_banner.dart';
+import 'package:groccery_app/screens/dashboard/mart_page.dart';
+import 'package:groccery_app/screens/dashboard/food_page.dart';
+import 'package:groccery_app/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -160,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 7.sp,
                 mainAxisSpacing: 7.sp,
-                children: const [
+                children: [
                   StaggeredGridTile.count(
                     crossAxisCellCount: 1,
                     mainAxisCellCount: 1.2,
@@ -169,6 +172,10 @@ class _HomePageState extends State<HomePage> {
                       timing: "25 mins",
                       imageUrl:
                           "https://www.freepnglogos.com/uploads/burger-png/burger-png-png-images-yellow-images-12.png",
+                      onTab: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DashBoardScreen(1)));
+                      },
                     ),
                   ),
                   StaggeredGridTile.count(
@@ -179,6 +186,10 @@ class _HomePageState extends State<HomePage> {
                       timing: "25 mins",
                       imageUrl:
                           "https://www.pngplay.com/wp-content/uploads/7/Grocery-Transparent-PNG.png",
+                      onTab: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DashBoardScreen(2)));
+                      },
                     ),
                   ),
                   StaggeredGridTile.count(
@@ -188,6 +199,10 @@ class _HomePageState extends State<HomePage> {
                       title: "Courier",
                       timing: "30 mins",
                       imageUrl: "https://pngimg.com/d/box_PNG92.png",
+                      onTab: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DashBoardScreen(4)));
+                      },
                     ),
                   ),
                   StaggeredGridTile.count(
@@ -198,6 +213,10 @@ class _HomePageState extends State<HomePage> {
                       timing: "No Waiting",
                       imageUrl:
                           "https://www.pngfind.com/pngs/b/569-5695753_dining-table-wooden-dining-table-design-with-glass.png",
+                      onTab: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DashBoardScreen(3)));
+                      },
                     ),
                   ),
                   StaggeredGridTile.count(
@@ -208,6 +227,7 @@ class _HomePageState extends State<HomePage> {
                       timing: "Free delivery can all order",
                       imageUrl:
                           "https://images.jdmagicbox.com/quickquotes/images_main/membership-card-2021435511-nvsf8jk6.png",
+                      onTab: () {},
                     ),
                   ),
                 ],

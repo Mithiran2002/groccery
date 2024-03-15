@@ -33,13 +33,13 @@ class TipsWidget extends StatelessWidget {
               child: Align(
                 alignment: Alignment.center,
                 child: Container(
-                  width: 54.5.sp,
+                  width: 53.5.sp,
                   height: 14.sp,
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(8.sp),
-                          bottomRight: Radius.circular(8.sp))),
+                          bottomRight: Radius.circular(8.sp),
+                          bottomLeft: Radius.circular(3.sp))),
                   child: Text(
                     textAlign: TextAlign.center,
                     "Most tipped",

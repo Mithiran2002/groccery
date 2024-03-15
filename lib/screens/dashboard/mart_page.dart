@@ -52,33 +52,34 @@ class _MartPageState extends State<MartPage> {
 
   List<Map<String, dynamic>> CardList = [
     {
-      "title": "Food",
+      "title": "Groccery & Essential ",
       "imgUrl":
-          "https://www.freepnglogos.com/uploads/burger-png/burger-png-png-images-yellow-images-12.png",
+          "https://www.pngall.com/wp-content/uploads/4/Grocery-PNG-HD-Quality.png",
     },
     {
-      "title": "Mart",
+      "title": "Meat & Fish",
       "imgUrl":
-          "https://www.pngplay.com/wp-content/uploads/7/Grocery-Transparent-PNG.png",
+          "https://www.pikpng.com/pngl/b/35-355749_fish-and-meat-png-transparent-fish-and-meat.png",
     },
     {
-      "title": "Courier",
-      "imgUrl": "https://pngimg.com/d/box_PNG92.png",
+      "title": "Pharmacy",
+      "imgUrl":
+          "https://clipart-library.com/images_k/pill-transparent-background/pill-transparent-background-16.png",
     },
     {
-      "title": "Dine in",
+      "title": "Pet Suppli",
       "imgUrl":
-          "https://www.pngfind.com/pngs/b/569-5695753_dining-table-wooden-dining-table-design-with-glass.png",
+          "https://earthwisepet.com/wp-content/uploads/2022/03/EarthWise-Pet-Supply-Dog-Food-and-Cat-food.png",
     },
     {
-      "title": " Membership",
+      "title": " Flowers",
       "imgUrl":
-          "https://images.jdmagicbox.com/quickquotes/images_main/membership-card-2021435511-nvsf8jk6.png",
+          "https://www.freepnglogos.com/uploads/flour-png/flour-flower-png-transparent-png-images-pluspng-2.png",
     },
     {
-      "title": "EMI Offers",
+      "title": "Gifts",
       "imgUrl":
-          "https://www.genuineautoelectricals.com/wp-content/uploads/2021/05/Bajaj-finance-card.png",
+          "https://www.freepnglogos.com/uploads/gift-png/gift-present-prize-icon-24.png",
     },
   ];
 
@@ -113,25 +114,29 @@ class _MartPageState extends State<MartPage> {
       "title": "Reliance Smart Buy",
       "time": "16km|20 mins",
       "rating": "4.5",
-      "imgUrl": "https://www.shutterstock.com/image-photo/portrait-millennial-lady-holding-using-260nw-1917230564.jpg"
+      "imgUrl":
+          "https://www.shutterstock.com/image-photo/portrait-millennial-lady-holding-using-260nw-1917230564.jpg"
     },
     {
       "title": " Fresh  Mart",
       "time": "18km|20 mins",
       "rating": "4.8",
-      "imgUrl": "https://media.istockphoto.com/id/1497211470/photo/black-woman-working-at-a-supermarket-arranging-carefully-the-tomato-display-at-the-produce.webp?b=1&s=170667a&w=0&k=20&c=-9vV_A0_2eNm1nxIy3YiJ2ontAdBzFkFVowvNFJYgPo="
+      "imgUrl":
+          "https://media.istockphoto.com/id/1497211470/photo/black-woman-working-at-a-supermarket-arranging-carefully-the-tomato-display-at-the-produce.webp?b=1&s=170667a&w=0&k=20&c=-9vV_A0_2eNm1nxIy3YiJ2ontAdBzFkFVowvNFJYgPo="
     },
     {
       "title": "Forms Fresh",
       "time": "15km|20 mins",
       "rating": "4.4",
-      "imgUrl": "https://static.toiimg.com/thumb/65532431.cms?width=1200&height=900"
+      "imgUrl":
+          "https://static.toiimg.com/thumb/65532431.cms?width=1200&height=900"
     },
     {
       "title": "Snack Fresh Buy",
       "time": "18km|20 mins",
       "rating": "4.1",
-      "imgUrl": "https://i.insider.com/5f3175424dca6804400b5667?width=600&format=jpeg&auto=webp"
+      "imgUrl":
+          "https://i.insider.com/5f3175424dca6804400b5667?width=600&format=jpeg&auto=webp"
     },
   ];
 
@@ -168,10 +173,12 @@ class _MartPageState extends State<MartPage> {
                           crossAxisCount: 3),
                       itemBuilder: (context, index) {
                         return CategoryCard(
-                            title: CardList[index]["title"],
-                            timing: CardList[index]["timing"],
-                            imageUrl: CardList[index]["imgUrl"],
-                            pushpa: false);
+                          title: CardList[index]["title"],
+                          timing: CardList[index]["timing"],
+                          imageUrl: CardList[index]["imgUrl"],
+                          pushpa: false,
+                          onTab: () {},
+                        );
                       }),
                 ),
               ),
@@ -222,7 +229,7 @@ class _MartPageState extends State<MartPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                 child: Text(
-                  "Popular Stores",
+                  "Hot Deals",
                   style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w900,
@@ -261,7 +268,7 @@ class _MartPageState extends State<MartPage> {
                           fontWeight: FontWeight.w900,
                           color: Colors.black),
                     ),
-                     const Spacer(),
+                    const Spacer(),
                     Text(
                       "78 Stores",
                       style: TextStyle(
@@ -285,13 +292,13 @@ class _MartPageState extends State<MartPage> {
               ...List.generate(
                   martData.length,
                   (index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: MartWidget(
-                        title: martData[index]["title"],
-                        time: martData[index]["time"],
-                        imgUrl: martData[index]["imgUrl"],
-                        rating: martData[index]["rating"]),
-                  ))
+                        padding: const EdgeInsets.all(8.0),
+                        child: MartWidget(
+                            title: martData[index]["title"],
+                            time: martData[index]["time"],
+                            imgUrl: martData[index]["imgUrl"],
+                            rating: martData[index]["rating"]),
+                      ))
             ],
           ),
         ),

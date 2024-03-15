@@ -9,31 +9,30 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context,Orientation,DeviceType) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-             home:SplashView(
-             duration: Duration(seconds:3),
+    return Sizer(builder: (context, Orientation, DeviceType) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashView(
+            duration: Duration(seconds: 3),
             backgroundColor: Color(0xFFe6470a),
-            title: Text("Groocery",style: TextStyle(fontSize: 50.sp,fontWeight: FontWeight.bold,color: Colors.white),),
-            done:Done(DashBoardScreen(),curve: Curves.easeIn)
-            
-          ),
-          
-        );
-      }
-    );
+            title: Text(
+              "Groocery",
+              style: TextStyle(
+                  fontSize: 50.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            done: Done(DashBoardScreen(0), curve: Curves.easeIn)),
+      );
+    });
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  
 
   final String title;
 
@@ -46,24 +45,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-    
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      
         title: Text(widget.title),
       ),
       body: Center(
-       
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(

@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groccery_app/widget/tips_widget.dart';
+import 'package:groccery_app/widget/custom_button.dart';
 
 class CartPage extends StatelessWidget {
   List<Map<String, dynamic>> chip = [
@@ -16,25 +17,22 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              size: 23.sp,
-              color: Colors.black,
-            )),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 22.sp,
+                  color: Colors.black,
+                )),
+            Gap(1.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Text(
                 "Cart",
                 style: TextStyle(
@@ -91,7 +89,7 @@ class CartPage extends StatelessWidget {
             ),
             Gap(1.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.w),
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -99,7 +97,7 @@ class CartPage extends StatelessWidget {
                     "Package Type",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 14.sp,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w700),
                   ),
                   Gap(0.5.h),
@@ -107,16 +105,16 @@ class CartPage extends StatelessWidget {
                     "Food Items|Electronics",
                     style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 10.sp,
+                        fontSize: 11.sp,
                         fontWeight: FontWeight.w600),
                   ),
                   Gap(1.h),
-                  Divider(),
+                  const Divider(),
                   Gap(3.h),
                   Text("Delivery Time",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w700)),
                   Gap(2.h),
                   Align(
@@ -125,7 +123,11 @@ class CartPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(14.sp),
+                          padding: EdgeInsets.only(
+                              left: 18.sp,
+                              right: 18.sp,
+                              top: 10.sp,
+                              bottom: 10.sp),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.sp),
                               border: Border.all(color: Colors.black)),
@@ -157,7 +159,11 @@ class CartPage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(14.sp),
+                          padding: EdgeInsets.only(
+                              left: 18.sp,
+                              right: 18.sp,
+                              top: 10.sp,
+                              bottom: 10.sp),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.sp),
                               border: Border.all(color: Colors.black)),
@@ -192,17 +198,17 @@ class CartPage extends StatelessWidget {
                     ),
                   ),
                   Gap(3.h),
-                  Divider(),
+                  const Divider(),
                   ListTile(
                     leading: Icon(
                       Icons.local_offer_outlined,
-                      size: 19.sp,
+                      size: 20.sp,
                       color: Colors.black,
                     ),
                     title: Text(
                       "Add Promo Code",
                       style: TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 13.sp),
+                          fontWeight: FontWeight.w700, fontSize: 15.5.sp),
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios_outlined,
@@ -213,18 +219,18 @@ class CartPage extends StatelessWidget {
                       "Get Discounts On Your Order",
                       style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 10.sp,
+                          fontSize: 11.sp,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
                   Gap(1.h),
-                  Divider(),
+                  const Divider(),
                   Gap(1.h),
                   Text(
                     "Add Tip",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 14.sp,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w700),
                   ),
                   SizedBox(
@@ -242,13 +248,13 @@ class CartPage extends StatelessWidget {
                           );
                         }),
                   ),
-                  Divider(),
+                  const Divider(),
                   Gap(2.h),
                   Text(
                     "Bill Details",
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14.sp,
+                        color: const Color.fromRGBO(0, 0, 0, 1),
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w700),
                   ),
                   Gap(1.h),
@@ -266,7 +272,7 @@ class CartPage extends StatelessWidget {
                         "- ₹15",
                         style: TextStyle(
                             color: Colors.green,
-                            fontSize: 10.sp,
+                            fontSize: 11.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -299,36 +305,22 @@ class CartPage extends StatelessWidget {
                         "Total",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 14.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         " ₹235",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 13.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   Gap(3.h),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.sp))),
-                            minimumSize:
-                                MaterialStatePropertyAll(Size(90.w, 6.h)),
-                            backgroundColor: const MaterialStatePropertyAll(
-                                Color(0xFFe6470a))),
-                        onPressed: () {},
-                        child: Text(
-                          "Make Payment",
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 13.sp),
-                        )),
+                  CustomButton(
+                    text: "Make Payment",
+                    onTab: () {},
                   ),
                   Gap(2.h),
                 ],
