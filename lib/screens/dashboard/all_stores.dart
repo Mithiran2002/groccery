@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:groccery_app/widget/mart_widget.dart';
 import 'package:groccery_app/screens/dashboard/Reliance_smart.dart';
 
+// ignore: must_be_immutable
 class AllStores extends StatelessWidget {
-  List<Map<String, dynamic>> martData = [
+ 
+
+  AllStores({super.key});
+ List<Map<String, dynamic>> martData = [
     {
       "title": "Reliance Smart Buy",
       "time": "16km|20 mins",
@@ -84,7 +88,6 @@ class AllStores extends StatelessWidget {
           "https://previews.123rf.com/images/nd3000/nd30001711/nd3000171100434/89081071-picture-of-woman-at-marketplace-buying-fruits.jpg"
     },
   ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

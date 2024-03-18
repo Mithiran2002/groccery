@@ -15,16 +15,23 @@ class DineInWidget extends StatelessWidget {
       children: [
         CircleAvatar(
           backgroundColor: Colors.grey,
-          backgroundImage: CachedNetworkImageProvider(imgUrl),
-          radius: 25.sp,
+          backgroundImage: CachedNetworkImageProvider(
+            imgUrl,
+          ),
+          radius: 23.sp,
         ),
         Gap(1.h),
-        Text(
-          title,
-          style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.black),
+        SizedBox(
+          width: 25.w,
+          child: Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black),
+          ),
         ),
       ],
     );

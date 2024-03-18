@@ -2,7 +2,9 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:groccery_app/widget/popular_section.dart';
+// ignore_for_file: must_be_immutable
 
 class FruitsPage extends StatelessWidget {
   List<Map<String, dynamic>> chiptext = [
@@ -64,6 +66,8 @@ class FruitsPage extends StatelessWidget {
           "https://media.istockphoto.com/id/641924940/photo/mangoes-composition-background.jpg?s=612x612&w=0&k=20&c=N60vzAI16zJxKZC2Gm7O_xrLUduBIsKEhJg-73_1jSU=",
     },
   ];
+
+  FruitsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -137,28 +141,47 @@ class FruitsPage extends StatelessWidget {
                     }),
               ),
               Gap(2.h),
-              Wrap(
-                alignment: WrapAlignment.start,
-                runAlignment: WrapAlignment.spaceAround,
-                // spacing: 10.0,
-                // runSpacing: 10.0,
-                children: List.generate(fruits.length, (index) {
-                  return GestureDetector(
-                    onTap: () {},
-                    child: PopularSection(
-                      salaar: false,
-                      title: fruits[index]["title"],
-                      description: fruits[index]["description"],
-                      imgUrl: fruits[index]["imgUrl"],
-                      favouriteIcon: Icon(
-                        Icons.favorite_outline,
-                        size: 19.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                  );
-                }),
-              )
+              SizedBox(
+                height: 100.h,
+                width: 100.h,
+                child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: fruits.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisExtent: 285,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10.sp,
+                        crossAxisSpacing: 15.sp),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                        child: PopularSection(
+                          salaar: false,
+                          title: fruits[index]["title"],
+                          description: fruits[index]["description"],
+                          imgUrl: fruits[index]["imgUrl"],
+                          favouriteIcon: Icon(
+                            Icons.favorite_outline,
+                            size: 19.sp,
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+              // ...List.generate(fruits.length, (index) {
+              //   return PopularSection(
+              //     salaar: false,
+              //     title: fruits[index]["title"],
+              //     description: fruits[index]["description"],
+              //     imgUrl: fruits[index]["imgUrl"],
+              //     favouriteIcon: Icon(
+              //       Icons.favorite_outline,
+              //       size: 19.sp,
+              //       color: Colors.black,
+              //     ),
+              //   );
+              // })
             ],
           ),
         ),

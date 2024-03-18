@@ -36,7 +36,7 @@ class PopularSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 1.5.w),
+      padding: EdgeInsets.only(right: 1.5.sp),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

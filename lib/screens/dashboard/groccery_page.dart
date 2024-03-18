@@ -13,6 +13,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/screens/dashboard/food_detail.dart';
 
 class GrocceryPage extends StatefulWidget {
+  const GrocceryPage({super.key});
+
   @override
   State<GrocceryPage> createState() => _GrocceryPageState();
 }

@@ -2,12 +2,14 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:groccery_app/widget/dinein_widget.dart';
 import 'package:groccery_app/widget/popular_section.dart';
 import 'package:groccery_app/screens/dashboard/all_stores.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/screens/dashboard/fruits_page.dart';
 
+// ignore: must_be_immutable
 class RelianceSmart extends StatelessWidget {
   List<Map<String, dynamic>> dealsonGrocery = [
     {
@@ -148,6 +150,8 @@ class RelianceSmart extends StatelessWidget {
     },
   ];
 
+  RelianceSmart({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -213,10 +217,33 @@ class RelianceSmart extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.w),
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: Text(
-                "BTm Layout|2.2k.|20min",
-                style: TextStyle(color: Colors.black, fontSize: 12.sp),
+                "BTM Layout|2.2k.|20min",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            Gap(1.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                    size: 13.sp,
+                  ),
+                  Text(
+                    "4.5(978 Rating)",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
               ),
             ),
             Gap(2.h),
@@ -264,18 +291,22 @@ class RelianceSmart extends StatelessWidget {
               ),
             ),
             Gap(2.h),
-            SizedBox(
+            Container(
               height: 45.h,
               child: GridView.builder(
                   itemCount: dineCart.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 125,
                       crossAxisCount: 4,
-                      mainAxisSpacing: 25.sp,
+                      mainAxisSpacing: 10.sp,
                       crossAxisSpacing: 1.sp),
                   itemBuilder: (context, index) {
-                    return DineInWidget(
-                      title: dineCart[index]["title"],
-                      imgUrl: dineCart[index]["imgUrl"],
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.0.sp),
+                      child: DineInWidget(
+                        title: dineCart[index]["title"],
+                        imgUrl: dineCart[index]["imgUrl"],
+                      ),
                     );
                   }),
             ),

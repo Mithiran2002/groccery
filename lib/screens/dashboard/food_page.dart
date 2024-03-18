@@ -384,7 +384,7 @@ class _ListPage extends State<FoodPage> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => FoodDetailPage()));
+                          builder: (context) => RestaurantPage()));
                     },
                     child: PopularSection(
                       salaar: true,

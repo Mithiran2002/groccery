@@ -1,13 +1,24 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:groccery_app/screens/dashboard/searchbar_page.dart';
 
 class SearchbarWidget extends StatelessWidget {
-  const SearchbarWidget({super.key});
+  final bool? search;
 
+  const SearchbarWidget({super.key, this.search = true});
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      onTap: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => SearchbarPage()));
+      },
+      shape: search != true
+          ? MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.sp)))
+          : MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.sp))),
       shadowColor: const MaterialStatePropertyAll(Color(0xFFf0f0f1)),
       elevation: const MaterialStatePropertyAll(1),
       trailing: <Widget>[

@@ -86,7 +86,7 @@ class SearchbarPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                 child: SearchbarWidget(
-                  // border: false,
+                  search: false,
                 ),
               ),
               Gap(2.h),

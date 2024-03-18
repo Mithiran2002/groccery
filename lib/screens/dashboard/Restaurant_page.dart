@@ -137,19 +137,25 @@ class _RestaurantPageState extends State<RestaurantPage> {
                               child: ListView.builder(
                                   itemCount: bottom.length,
                                   itemBuilder: ((context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      // child: Container(
-                                      //   height: 2.h,
-                                      //   width: 50.w,
-                                      //   color: Colors.amber,
-                                      // ),
-                                      child: ListTile(
-                                          title: bottom[index]['title'],
-                                          trailing: bottom[index]['intvalue']),
+                                    return ListTile(
+                                      title: Text(
+                                        bottom[index]['title'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      trailing: Text(
+                                        bottom[index]['intvalue'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
                                     );
                                   })),
-                            )
+                            ),
+                            Gap(1.h),
                           ],
                         ),
                       ));
