@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             Gap(2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
-              child: const SearchbarWidget(),
+              child:  SearchbarWidget(),
             ),
             Gap(2.h),
             Padding(

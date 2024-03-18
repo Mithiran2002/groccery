@@ -5,21 +5,82 @@ import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:groccery_app/widget/mart_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:groccery_app/widget/category_card.dart';
-import 'package:groccery_app/widget/header_widget.dart';
 import 'package:groccery_app/widget/popular_section.dart';
 import 'package:groccery_app/widget/home_page_banner.dart';
 import 'package:groccery_app/widget/searchbar_widget.dart';
 import 'package:groccery_app/screens/dashboard/all_stores.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/screens/dashboard/groccery_page.dart';
+import 'package:groccery_app/screens/dashboard/food_detail.dart';
 
-class MartPage extends StatefulWidget {
+class GrocceryPage extends StatefulWidget {
   @override
-  State<MartPage> createState() => _MartPageState();
+  State<GrocceryPage> createState() => _GrocceryPageState();
 }
 
-class _MartPageState extends State<MartPage> {
+class _GrocceryPageState extends State<GrocceryPage> {
+  List<Map<String, dynamic>> foodCatogory = [
+    {
+      "title": "Fruits & Vegetables",
+      "imgUrl":
+          "https://www.freepnglogos.com/uploads/vegetables-png/vegetables-download-vegetable-photos-png-image-pngimg-3.png",
+    },
+    {
+      "title": "Bread and Egg",
+      "imgUrl":
+          "https://harvestgold.in/image/ProductImage/818a8a255136cbe36165ad397ee9a2b4.png",
+    },
+    {
+      "title": "Cereals and breakfast",
+      "imgUrl":
+          "https://www.pngall.com/wp-content/uploads/15/Cereal-PNG-Pic.webp",
+    },
+    {
+      "title": "Chocklates & Deserts",
+      "imgUrl":
+          "https://static.vecteezy.com/system/resources/previews/031/112/836/original/ai-generated-chocolate-milk-drink-in-glass-transparent-background-free-png.png",
+    },
+    {
+      "title": "Rava",
+      "imgUrl":
+          "https://5.imimg.com/data5/RF/WZ/ML/SELLER-13640528/star-idli-rava-500x500.png",
+    },
+    {
+      "title": "Face Creams",
+      "imgUrl": "https://ik.imagekit.io/jammi/img/Glow-1024x1024.png",
+    },
+  ];
+
+  List<Map<String, dynamic>> catogory = [
+    {
+      "title": "Orgonic Atta",
+      "imgUrl": "https://amulorganic.org/assets/res/amul_products2.png",
+    },
+    {
+      "title": "Nuts & Spices",
+      "imgUrl":
+          "https://5.imimg.com/data5/SELLER/Default/2022/1/FF/JZ/IS/117140626/almond-500x500.png",
+    },
+    {
+      "title": "Yippee Noodles",
+      "imgUrl":
+          "https://www.bigbasket.com/media/uploads/p/xxl/1201325-2_2-sunfeast-yippee-noodles-magic-masala.jpg",
+    },
+    {
+      "title": "Maggie",
+      "imgUrl":
+          "https://i.pinimg.com/originals/d4/51/d1/d451d1608889338fbf7a190fd15423db.png",
+    },
+    {
+      "title": "Paneer Butter Masala",
+      "imgUrl":
+          "https://assets-global.website-files.com/6305f7d600c9842969920a58/63ec99466497d41831454344_eCVSXogSApXQscf9GqoBYqpPFKCCQvv7XZXPAaS8NGg.png",
+    },
+    {
+      "title": "Masalas",
+      "imgUrl":
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/OE/HA/DY/310912/garam-masala-500x500.png",
+    },
+  ];
   List<Map<String, dynamic>> homebanner = [
     {
       "off": "25% Off",
@@ -51,40 +112,6 @@ class _MartPageState extends State<MartPage> {
       "positionedColor": const Color(0xFFDDBEFF),
     }
   ];
-
-  List<Map<String, dynamic>> CardList = [
-    {
-      "title": "Groccery & Essential ",
-      "imgUrl":
-          "https://www.pngall.com/wp-content/uploads/4/Grocery-PNG-HD-Quality.png",
-    },
-    {
-      "title": "Meat & Fish",
-      "imgUrl":
-          "https://www.pikpng.com/pngl/b/35-355749_fish-and-meat-png-transparent-fish-and-meat.png",
-    },
-    {
-      "title": "Pharmacy",
-      "imgUrl":
-          "https://clipart-library.com/images_k/pill-transparent-background/pill-transparent-background-16.png",
-    },
-    {
-      "title": "Pet Suppli",
-      "imgUrl":
-          "https://earthwisepet.com/wp-content/uploads/2022/03/EarthWise-Pet-Supply-Dog-Food-and-Cat-food.png",
-    },
-    {
-      "title": " Flowers",
-      "imgUrl":
-          "https://www.freepnglogos.com/uploads/flour-png/flour-flower-png-transparent-png-images-pluspng-2.png",
-    },
-    {
-      "title": "Gifts",
-      "imgUrl":
-          "https://www.freepnglogos.com/uploads/gift-png/gift-present-prize-icon-24.png",
-    },
-  ];
-
   List<Map<String, dynamic>> dealsonGrocery = [
     {
       "title": "Kellag's Crunchy fruit and nuit muesli",
@@ -152,42 +179,121 @@ class _MartPageState extends State<MartPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 22.sp,
+                    color: Colors.black,
+                  )),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
-                child: const HeaderWidget(),
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Text(
+                  "Groccery & Essential",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 22.sp),
+                ),
               ),
+              Gap(2.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w),
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: SearchbarWidget(),
               ),
               Gap(2.h),
               SizedBox(
-                height: 31.h,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 3.w,
-                  ),
-                  child: GridView.builder(
-                      itemCount: CardList.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 7.sp,
-                          mainAxisSpacing: 12.sp,
-                          crossAxisCount: 3),
-                      itemBuilder: (context, index) {
-                        return CategoryCard(
-                          title: CardList[index]["title"],
-                          timing: CardList[index]["timing"],
-                          imageUrl: CardList[index]["imgUrl"],
-                          pushpa: false,
-                          onTab: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => GrocceryPage()));
-                          },
-                        );
-                      }),
-                ),
+                height: 15.h,
+                child: ListView.builder(
+                    padding: EdgeInsets.only(
+                      left: 3.w,
+                    ),
+                    itemCount: foodCatogory.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.sp),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => FoodDetailPage()));
+                              },
+                              child: CircleAvatar(
+                                maxRadius: 24.sp,
+                                backgroundColor: const Color(0xFFf0f0f1),
+                                child: CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    height: 6.h,
+                                    imageUrl: foodCatogory[index]["imgUrl"]),
+                              ),
+                            ),
+                            Gap(1.h),
+                            SizedBox(
+                              width: 15.w,
+                              child: Text(
+                                foodCatogory[index]["title"],
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
               ),
-              Gap(1.h),
+              Gap(2.h),
+              SizedBox(
+                height: 15.h,
+                child: ListView.builder(
+                    padding: EdgeInsets.only(
+                      left: 3.w,
+                    ),
+                    itemCount: catogory.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.sp),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => FoodDetailPage()));
+                              },
+                              child: CircleAvatar(
+                                maxRadius: 24.sp,
+                                backgroundColor: const Color(0xFFf0f0f1),
+                                child: CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    height: 6.h,
+                                    imageUrl: catogory[index]["imgUrl"]),
+                              ),
+                            ),
+                            Gap(1.h),
+                            SizedBox(
+                              width: 15.w,
+                              child: Text(
+                                catogory[index]["title"],
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+              Gap(2.h),
               CarouselSlider.builder(
                 itemCount: homebanner.length,
                 itemBuilder: (context, index, realIndex) {
@@ -234,14 +340,13 @@ class _MartPageState extends State<MartPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                 child: Text(
-                  "Deals On Grocery",
+                  "Hot Deals",
                   style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w900,
                       color: Colors.black),
                 ),
               ),
-              Gap(1.h),
               SizedBox(
                 height: 35.h,
                 child: ListView.builder(
@@ -261,7 +366,7 @@ class _MartPageState extends State<MartPage> {
                   ),
                 ),
               ),
-              Gap(3.h),
+              Gap(2.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                 child: Row(
@@ -285,27 +390,25 @@ class _MartPageState extends State<MartPage> {
                     CircleAvatar(
                         backgroundColor: const Color(0xFFf0f0f1),
                         child: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => AllStores()));
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            size: 15.sp,
-                            color: Colors.black,
-                          ),
-                        )),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => AllStores()));
+                            },
+                            icon: Icon(Icons.arrow_forward,
+                                size: 17.sp, color: Colors.black))),
                   ],
                 ),
               ),
-              Gap(2.5.h),
               ...List.generate(
                   martData.length,
-                  (index) => MartWidget(
-                      title: martData[index]["title"],
-                      time: martData[index]["time"],
-                      imgUrl: martData[index]["imgUrl"],
-                      rating: martData[index]["rating"]))
+                  (index) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: 1.h),
+                        child: MartWidget(
+                            title: martData[index]["title"],
+                            time: martData[index]["time"],
+                            imgUrl: martData[index]["imgUrl"],
+                            rating: martData[index]["rating"]),
+                      ))
             ],
           ),
         ),

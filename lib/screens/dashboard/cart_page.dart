@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groccery_app/widget/tips_widget.dart';
 import 'package:groccery_app/widget/custom_button.dart';
+import 'package:groccery_app/screens/dashboard/coupons_page.dart';
 
 class CartPage extends StatelessWidget {
   List<Map<String, dynamic>> chip = [
@@ -200,6 +201,10 @@ class CartPage extends StatelessWidget {
                   Gap(3.h),
                   const Divider(),
                   ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CouponsPage()));
+                    },
                     leading: Icon(
                       Icons.local_offer_outlined,
                       size: 20.sp,

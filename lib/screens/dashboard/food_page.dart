@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,6 +13,8 @@ import 'package:groccery_app/widget/popular_section.dart';
 import 'package:groccery_app/widget/home_page_banner.dart';
 import 'package:groccery_app/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:groccery_app/screens/dashboard/food_detail.dart';
+import 'package:groccery_app/screens/dashboard/Restaurant_page.dart';
 
 class FoodPage extends StatefulWidget {
   const FoodPage({super.key});
@@ -74,6 +78,38 @@ class _ListPage extends State<FoodPage> {
       "title": "Chicken 65",
       "imgUrl":
           "https://b.zmtcdn.com/data/pictures/2/20605842/ac47b1d6f2cb48f49ebef318c2f79bf5.png?fit=around|960:500&crop=960:500;*,*",
+    },
+  ];
+  List<Map<String, dynamic>> catogory = [
+    {
+      "title": "Biriyani",
+      "imgUrl":
+          "https://static.vecteezy.com/system/resources/previews/027/144/452/non_2x/delicious-chicken-biryani-isolated-on-transparent-background-png.png",
+    },
+    {
+      "title": "Parotta",
+      "imgUrl":
+          "https://itsbenlifestyle.com/cdn/shop/products/Pu6OdE1nLw.png?v=1701870502",
+    },
+    {
+      "title": "Meals",
+      "imgUrl":
+          "https://i.pinimg.com/originals/6b/3b/6a/6b3b6a6468763725fb1f2672d63bb03a.png",
+    },
+    {
+      "title": "Tandoori",
+      "imgUrl":
+          "https://static.vecteezy.com/system/resources/previews/027/144/459/original/tasty-chicken-tandoori-isolated-on-background-free-png.png",
+    },
+    {
+      "title": "Mutton",
+      "imgUrl":
+          "https://assets-global.website-files.com/6305f7d600c9842969920a58/63ec99466497d41831454344_eCVSXogSApXQscf9GqoBYqpPFKCCQvv7XZXPAaS8NGg.png",
+    },
+    {
+      "title": "Paneer Masala",
+      "imgUrl":
+          "https://assets-global.website-files.com/6305f7d600c9842969920a58/63c77da4294077e86c126f1e_O_ZzNK9FqpGHZE-SxZosKUOvr-Y-0Zi0or5TzEwojGE.png",
     },
   ];
   List<Map<String, dynamic>> homebanner = [
@@ -159,7 +195,7 @@ class _ListPage extends State<FoodPage> {
               Gap(1.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child: const SearchbarWidget(),
+                child: SearchbarWidget(),
               ),
               Gap(2.h),
               SizedBox(
@@ -175,13 +211,19 @@ class _ListPage extends State<FoodPage> {
                         padding: EdgeInsets.symmetric(horizontal: 5.sp),
                         child: Column(
                           children: [
-                            CircleAvatar(
-                              maxRadius: 24.sp,
-                              backgroundColor: const Color(0xFFf0f0f1),
-                              child: CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  height: 6.h,
-                                  imageUrl: foodCatogory[index]["imgUrl"]),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => FoodDetailPage()));
+                              },
+                              child: CircleAvatar(
+                                maxRadius: 24.sp,
+                                backgroundColor: const Color(0xFFf0f0f1),
+                                child: CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    height: 6.h,
+                                    imageUrl: foodCatogory[index]["imgUrl"]),
+                              ),
                             ),
                             Gap(1.h),
                             SizedBox(
@@ -207,26 +249,32 @@ class _ListPage extends State<FoodPage> {
                     padding: EdgeInsets.only(
                       left: 3.w,
                     ),
-                    itemCount: foodCatogory.length,
+                    itemCount: catogory.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.sp),
                         child: Column(
                           children: [
-                            CircleAvatar(
-                              maxRadius: 24.sp,
-                              backgroundColor: const Color(0xFFf0f0f1),
-                              child: CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  height: 6.h,
-                                  imageUrl: foodCatogory[index]["imgUrl"]),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => FoodDetailPage()));
+                              },
+                              child: CircleAvatar(
+                                maxRadius: 24.sp,
+                                backgroundColor: const Color(0xFFf0f0f1),
+                                child: CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    height: 6.h,
+                                    imageUrl: catogory[index]["imgUrl"]),
+                              ),
                             ),
                             Gap(1.h),
                             SizedBox(
                               width: 15.w,
                               child: Text(
-                                foodCatogory[index]["title"],
+                                catogory[index]["title"],
                                 maxLines: 2,
                                 style: TextStyle(
                                     fontSize: 11.sp,
@@ -333,19 +381,25 @@ class _ListPage extends State<FoodPage> {
                 popularData.length,
                 (index) => Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: PopularSection(
-                    salaar: true,
-                    rrr: false,
-                    rating: '4.1',
-                    exploreTimings: popularData[index]["exploretiming"],
-                    title: popularData[index]["title"],
-                    description: popularData[index]["description"],
-                    timing: popularData[index]["timing"],
-                    imgUrl: popularData[index]["imgUrl"],
-                    favouriteIcon: Icon(
-                      Icons.favorite_outline,
-                      size: 19.sp,
-                      color: Colors.black,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => FoodDetailPage()));
+                    },
+                    child: PopularSection(
+                      salaar: true,
+                      rrr: false,
+                      rating: '4.1',
+                      exploreTimings: popularData[index]["exploretiming"],
+                      title: popularData[index]["title"],
+                      description: popularData[index]["description"],
+                      timing: popularData[index]["timing"],
+                      imgUrl: popularData[index]["imgUrl"],
+                      favouriteIcon: Icon(
+                        Icons.favorite_outline,
+                        size: 19.sp,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),

@@ -173,7 +173,7 @@ class _DineInPageState extends State<DineInPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child: const SearchbarWidget(),
+                child:  SearchbarWidget(),
               ),
               Gap(2.h),
               SizedBox(
