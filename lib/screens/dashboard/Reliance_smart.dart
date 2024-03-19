@@ -85,7 +85,7 @@ class RelianceSmart extends StatelessWidget {
       "title": "Mangoes",
       "description": "₹160/kg",
       "imgUrl":
-          "https://media.maalaimalar.com/h-upload/2023/03/01/1843048-onion.webp",
+          "https://media.istockphoto.com/id/641924940/photo/mangoes-composition-background.jpg?s=612x612&w=0&k=20&c=N60vzAI16zJxKZC2Gm7O_xrLUduBIsKEhJg-73_1jSU=",
     },
   ];
   List<Map<String, dynamic>> dineCart = [
@@ -246,9 +246,7 @@ class RelianceSmart extends StatelessWidget {
                 ],
               ),
             ),
-            Gap(2.h),
-            Divider(),
-            Gap(2.h),
+            const Divider(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
               child: Text(
@@ -259,7 +257,7 @@ class RelianceSmart extends StatelessWidget {
                     color: Colors.black),
               ),
             ),
-            Gap(1.h),
+            Gap(0.5.h),
             SizedBox(
               height: 35.h,
               child: ListView.builder(
@@ -290,27 +288,25 @@ class RelianceSmart extends StatelessWidget {
                     color: Colors.black),
               ),
             ),
-            Gap(2.h),
-            Container(
+            Gap(1.h),
+            SizedBox(
               height: 45.h,
               child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: dineCart.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisExtent: 125,
                       crossAxisCount: 4,
                       mainAxisSpacing: 10.sp,
+                      childAspectRatio: 0.85,
                       crossAxisSpacing: 1.sp),
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0.sp),
-                      child: DineInWidget(
-                        title: dineCart[index]["title"],
-                        imgUrl: dineCart[index]["imgUrl"],
-                      ),
+                    return DineInWidget(
+                      title: dineCart[index]["title"],
+                      imgUrl: dineCart[index]["imgUrl"],
                     );
                   }),
             ),
-            Gap(2.h),
+            Gap(1.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -332,12 +328,12 @@ class RelianceSmart extends StatelessWidget {
                           onPressed: () {},
                           icon: Icon(Icons.arrow_forward,
                               size: 17.sp, color: Colors.black))),
-                )
+                ),
               ],
             ),
-            Gap(2.h),
+            Gap(0.5.h),
             SizedBox(
-              height: 35.h,
+              height: 33.h,
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                 scrollDirection: Axis.horizontal,
@@ -355,7 +351,7 @@ class RelianceSmart extends StatelessWidget {
                 ),
               ),
             ),
-            Gap(2.h),
+            Gap(0.5.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -374,7 +370,10 @@ class RelianceSmart extends StatelessWidget {
                   child: CircleAvatar(
                       backgroundColor: const Color(0xFFf0f0f1),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => FruitsPage()));
+                          },
                           icon: Icon(Icons.arrow_forward,
                               size: 17.sp, color: Colors.black))),
                 )
@@ -382,7 +381,7 @@ class RelianceSmart extends StatelessWidget {
             ),
             Gap(1.h),
             SizedBox(
-              height: 35.h,
+              height: 33.h,
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                 scrollDirection: Axis.horizontal,

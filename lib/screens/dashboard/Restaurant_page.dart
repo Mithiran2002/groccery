@@ -14,7 +14,7 @@ class RestaurantPage extends StatefulWidget {
 }
 
 class _RestaurantPageState extends State<RestaurantPage> {
-  bool switchvalue = true;
+  bool switchvalue = false;
   List<Map<String, dynamic>> listFood = [
     {
       "title": "Pizza is Wonderful taste ",
@@ -24,21 +24,21 @@ class _RestaurantPageState extends State<RestaurantPage> {
           "https://www.eatingwell.com/thmb/vfsH3HUV7V-3bgUFXHs4JmwdJXY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-pizza-ck-x-fe666e4956254faa891e8b238d1a8664.jpg"
     },
     {
-      "title": " Cheese Pizza is Wonderful taste  ",
+      "title": "Cheese Pizza is Wonderful taste  ",
       "secound": "The tasty and very nice to Eat,Good",
       "price": "₹480",
       "imgUrl":
           "https://thecozycook.com/wp-content/uploads/2023/08/Buffalo-Chicken-Pizza-f.jpg"
     },
     {
-      "title": " chicken Pizza is Wonderful taste  ",
+      "title": "chicken Pizza is Wonderful taste  ",
       "secound": "The tasty and juicy chicken",
       "price": "₹350",
       "imgUrl":
           "https://static.toiimg.com/thumb/53339084.cms?imgsize=85489&width=800&height=800"
     },
     {
-      "title": " Butter Pizza is Wonderful taste ",
+      "title": "Butter Pizza is Wonderful taste ",
       "secound": "The tasty and juicy butter",
       "price": "₹250",
       "imgUrl":
@@ -305,12 +305,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
               size: 13.sp,
               color: Colors.green,
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               padding: EdgeInsets.all(4.sp),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.sp),
-                color: Color(0xFFf0f0f1),
+                color: const Color(0xFFf0f0f1),
               ),
               child: Row(
                 children: [
@@ -351,14 +351,11 @@ class _RestaurantPageState extends State<RestaurantPage> {
         ),
         ...List.generate(
             listFood.length,
-            (index) => Padding(
-                  padding: EdgeInsets.only(top: 20.sp),
-                  child: FoodList(
-                      title: listFood[index]["title"],
-                      secound: listFood[index]["secound"],
-                      price: listFood[index]["price"],
-                      imgUrl: listFood[index]["imgUrl"]),
-                )),
+            (index) => FoodList(
+                title: listFood[index]["title"],
+                secound: listFood[index]["secound"],
+                price: listFood[index]["price"],
+                imgUrl: listFood[index]["imgUrl"])),
         Gap(1.5.h),
         CustomButton(
             text: "View Cart(2 Items)",

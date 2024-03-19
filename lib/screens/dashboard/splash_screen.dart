@@ -24,15 +24,17 @@ class _SpalashScreenState extends State<SpalashScreen> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: Color(0xFFe6470a),
-          body: Center(
-            child: Text(
-              "Groocery",
-              style: TextStyle(
-                  fontSize: 40.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white),
-            ),
-          )),
+          body:Column(
+            children: [
+               Image.asset(
+            "assets/png/intro.png",
+            height: 7.h,
+          ),
+          Text("Grocery")
+            ],
+          )
+    
+          ),
     );
   }
 }

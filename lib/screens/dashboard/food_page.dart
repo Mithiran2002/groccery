@@ -14,7 +14,7 @@ import 'package:groccery_app/widget/home_page_banner.dart';
 import 'package:groccery_app/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/screens/dashboard/food_detail.dart';
-import 'package:groccery_app/screens/dashboard/Restaurant_page.dart';
+import 'package:groccery_app/screens/dashboard/restaurant_page.dart';
 
 class FoodPage extends StatefulWidget {
   const FoodPage({super.key});

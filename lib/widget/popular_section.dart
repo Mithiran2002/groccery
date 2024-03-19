@@ -16,6 +16,7 @@ class PopularSection extends StatelessWidget {
   final bool kgf;
   final String? layout;
   final String? amount;
+  final bool pushpa;
 
   const PopularSection({
     required this.salaar,
@@ -31,6 +32,7 @@ class PopularSection extends StatelessWidget {
     this.layout,
     this.amount,
     this.kgf = true,
+    this.pushpa = true,
   });
 
   @override
@@ -52,7 +54,7 @@ class PopularSection extends StatelessWidget {
                     height: 23.h,
                     width: (salaar == true && rrr != true)
                         ? 100.w
-                        : salaar == true
+                        : (salaar == true || pushpa != true)
                             ? 46.w
                             : 40.w,
                     imageUrl: imgUrl,
@@ -62,7 +64,7 @@ class PopularSection extends StatelessWidget {
               Positioned(
                   left: (salaar == true && rrr != true)
                       ? 80.w
-                      : salaar == true
+                      : (salaar == true || pushpa != true)
                           ? 35.w
                           : 28.w,
                   top: 1.h,
@@ -72,7 +74,7 @@ class PopularSection extends StatelessWidget {
                       child: favouriteIcon)),
               if (salaar != true)
                 Positioned(
-                    left: 28.w,
+                    left: pushpa != true ? 35.w : 28.w,
                     top: 16.h,
                     child: CircleAvatar(
                         maxRadius: 12.sp,

@@ -5,8 +5,12 @@ import 'package:groccery_app/screens/dashboard/searchbar_page.dart';
 
 class SearchbarWidget extends StatelessWidget {
   final bool? search;
-
-  const SearchbarWidget({super.key, this.search = true});
+  final bool? type;
+  const SearchbarWidget({
+    super.key,
+    this.search = true,
+    this.type,
+  });
   @override
   Widget build(BuildContext context) {
     return SearchBar(
@@ -37,7 +41,7 @@ class SearchbarWidget extends StatelessWidget {
           Icons.filter_list_rounded,
           size: 18.sp,
           color: Colors.black,
-        )
+        ),
       ],
       backgroundColor: const MaterialStatePropertyAll(Color(0xFFf0f0f1)),
       hintText: "Search for food,grocery,etc",

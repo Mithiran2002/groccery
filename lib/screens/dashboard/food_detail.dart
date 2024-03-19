@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:groccery_app/widget/popular_section.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/screens/dashboard/dinein_page.dart';
-import 'package:groccery_app/screens/dashboard/Restaurant_page.dart';
+import 'package:groccery_app/screens/dashboard/restaurant_page.dart';
 
 class FoodDetailPage extends StatefulWidget {
   @override
@@ -20,8 +20,6 @@ class _FoodDetailPageState extends State<FoodDetailPage>
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: 7);
-
-    // TODO: implement initState
     super.initState();
   }
 
@@ -37,68 +35,66 @@ class _FoodDetailPageState extends State<FoodDetailPage>
 
   List<Map<String, dynamic>> foodCatogory = [
     {
-      "title": "Pizza",
+      "title": "Chicken Biriyani",
       "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/021/311/734/original/pizza-transparent-background-png.png",
+          "https://static.vecteezy.com/system/resources/previews/025/139/317/original/exquisite-chicken-biryani-with-earthen-pot-background-removed-for-maximum-impact-png.png",
     },
     {
-      "title": "Burger",
+      "title": "Mutton Biriyani",
       "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/021/952/459/original/free-tasty-hamburger-on-transparent-background-free-png.png",
+          "https://lattubiryani.com/wp-content/uploads/2020/08/multani-mitti.png",
     },
     {
-      "title": "Pasta",
+      "title": "Prawn Biriyani",
       "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/027/297/786/original/spaghetti-with-tomato-sauce-and-basil-in-a-plate-isolated-on-white-transparent-background-ai-generate-png.png",
+          "https://b.zmtcdn.com/data/dish_photos/27b/5eb8b7a8f2f15e2d13f784732d91527b.png",
     },
     {
-      "title": "Chicken Lollipop",
-      "imgUrl":
-          "https://flybuy.in/wp-content/uploads/2020/03/kisspng-fried-chicken-chicken-lollipop-biryani-buffalo-win-bubbles-chicken-lollipop-foodwifi-5c6b1e5603c478.5773671215505239900154.png",
+      "title": "Fish Biriyani",
+      "imgUrl": "https://www.pngkey.com/png/full/402-4022713_fish-biryani.png",
     },
     {
-      "title": "cheese Burger",
-      "imgUrl":
-          "https://upload.wikimedia.org/wikipedia/commons/1/11/Cheeseburger.png",
+      "title": "Veg Biriyani",
+      "imgUrl": "https://www.acebiryani.co.nz/assets/img/Vegetable-Biryani.png",
     },
     {
-      "title": "Chicken 65",
+      "title": "Mushroom Biriyani",
       "imgUrl":
-          "https://b.zmtcdn.com/data/pictures/2/20605842/ac47b1d6f2cb48f49ebef318c2f79bf5.png?fit=around|960:500&crop=960:500;*,*",
+          "https://urbantiffin.shop/cdn/shop/products/mushroomdrawing.png?v=1650287319",
     },
   ];
   List<Map<String, dynamic>> popularData = [
     {
-      "title": "Pizza",
-      "description": "Chinese|Thai|seafoods|Indian",
+      "title": "Chicken Biriyani",
+      "description": "indian|chicken||Indian",
       "timing": "4.5|4km|30 MIns",
       "exploretiming": "3.5|1km|25 min",
       "imgUrl":
-          "https://thumbs.dreamstime.com/b/pizza-rustic-italian-mozzarella-cheese-basil-leaves-35669930.jpg",
+          "https://recipes.net/wp-content/uploads/2023/05/air-fryer-chicken-biryani-recipe_6968eb6ab4a5ae22d136dab86c9ea8af.jpeg",
     },
     {
-      "title": "Cheese Burger",
-      "description": "Indian|Receipe|chick",
+      "title": "Mutton Biriyani",
+      "description": "Indian|Receipe|mutton",
       "timing": "4.6|5km|35 MIns",
       "exploretiming": "3.7|1km|27 min",
       "imgUrl":
-          "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42-500x500.jpg",
+          "https://www.masala.tv/wp-content/uploads/2021/05/mutton-biryanii.jpg",
     },
     {
-      "title": "Mutton Chukka",
-      "description": "Indian|Receipe|Mutto",
+      "title": "Prawn Biriyani",
+      "description": "Indian|Receipe|prawn",
       "timing": "4.3|3km|25 MIns",
       "exploretiming": "4.2|1km|29 min",
       "imgUrl":
-          "https://beta.theindianclaypot.com/content/images/wp-content/uploads/2019/07/mutton-chops.jpg",
+          "https://feed-your-sole.com/wp-content/uploads/2020/07/King-Prawn-Biryani.png",
     },
     {
-      "title": "Chicken Biriyani",
+      "title": "Veg Biriyani",
       "description": "Indian|Receipe|Biriyani",
       "timing": "4.5|2km|30 MIns",
       "exploretiming": "3.2|1km|27 min",
       "imgUrl":
-          "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-biryani-awadhi-01.jpg",
+          "https://madhurasrecipe.com/wp-content/uploads/2023/03/Veg-Biryani-Featured.jpg",
     }
   ];
 
@@ -172,7 +168,7 @@ class _FoodDetailPageState extends State<FoodDetailPage>
                         children: [
                           CircleAvatar(
                             maxRadius: 24.sp,
-                            backgroundColor: const Color(0xFFf0f0f1),
+                            backgroundColor: Color(0xFFf0f0f1),
                             child: CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 height: 6.h,

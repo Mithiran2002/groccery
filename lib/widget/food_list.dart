@@ -16,82 +16,88 @@ class FoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              width: 38.w,
-              child: Column(
+    return Padding(
+      padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 5.sp),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 38.w,
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        title ?? "",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Gap(0.8.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        secound ?? "",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 9.5.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Gap(1.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        price ?? "",
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Stack(
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      title ?? "",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.sp),
+                    child: CachedNetworkImage(
+                        fit: BoxFit.fitHeight,
+                        height: 12.h,
+                        imageUrl: imgUrl ?? ""),
                   ),
-                  Gap(0.8.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      secound ?? "",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 9.5.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
-                    ),
-                  ),
-                  Gap(1.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      price ?? "",
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                  ),
-                  Gap(2.h),
+                  Positioned(
+                      top: 50.sp,
+                      left: 8.sp,
+                      child: InputQty(
+                          initVal: 0,
+                          qtyFormProps: QtyFormProps(enableTyping: false),
+                          decoration: QtyDecorationProps(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(13.sp)),
+                              fillColor: Colors.white,
+                              btnColor: Color(0xFFe6470a),
+                              qtyStyle: QtyStyle.classic))),
                 ],
               ),
-            ),
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.sp),
-                  child: CachedNetworkImage(
-                      fit: BoxFit.fitHeight,
-                      height: 12.h,
-                      imageUrl: imgUrl ?? ""),
-                ),
-                Positioned(
-                    top: 50.sp,
-                    left: 8.sp,
-                    child: InputQty(
-                        initVal: 0,
-                        decoration: QtyDecorationProps(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(13.sp)),
-                            fillColor: Colors.white,
-                            btnColor: Color(0xFFe6470a),
-                            qtyStyle: QtyStyle.classic))),
-              ],
-            ),
-          ],
-        ),
-        Divider(),
-      ],
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 5.sp),
+            child: Divider(),
+          ),
+        ],
+      ),
     );
   }
 }

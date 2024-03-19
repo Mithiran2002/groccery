@@ -3,7 +3,7 @@ import 'package:groccery_app/screens/dashboard/home_page.dart';
 import 'package:groccery_app/screens/dashboard/food_page.dart';
 import 'package:groccery_app/screens/dashboard/mart_page.dart';
 import 'package:groccery_app/screens/dashboard/dinein_page.dart';
-import 'package:groccery_app/screens/dashboard/courier_page.dart';
+import 'package:groccery_app/screens/dashboard/parcel_service.dart';
 
 class DashBoardScreen extends StatefulWidget {
   final int? index;
@@ -86,7 +86,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       case 3:
         return const DineInPage();
       case 4:
-        return CourierPage();
+        return ParcelService();
       default:
         return Container();
     }

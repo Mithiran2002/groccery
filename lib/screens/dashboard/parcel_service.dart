@@ -5,14 +5,14 @@ import 'package:groccery_app/widget/custom_button.dart';
 import 'package:groccery_app/widget/inputform_field.dart';
 import 'package:groccery_app/screens/dashboard/cart_page.dart';
 
-class CourierPage extends StatefulWidget {
-  const CourierPage({super.key});
+class ParcelService extends StatefulWidget {
+  const ParcelService({super.key});
 
   @override
-  State<CourierPage> createState() => CourierPageState();
+  State<ParcelService> createState() => ParcelServiceState();
 }
 
-class CourierPageState extends State<CourierPage> {
+class ParcelServiceState extends State<ParcelService> {
   bool? ischecked = true;
   List<String> text = [
     "Food Items",
@@ -28,7 +28,16 @@ class CourierPageState extends State<CourierPage> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          title: const Text("Parcel Delivery"),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                size: 20.sp,
+                color: Colors.white,
+              )),
+          title: const Text("Parcel Service"),
           titleTextStyle:
               TextStyle(fontSize: 23.sp, fontWeight: FontWeight.w600),
           toolbarHeight: 8.h,

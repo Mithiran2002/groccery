@@ -3,7 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groccery_app/widget/mart_widget.dart';
-import 'package:groccery_app/screens/dashboard/Reliance_smart.dart';
+import 'package:groccery_app/screens/dashboard/reliance_smart.dart';
 
 // ignore: must_be_immutable
 class AllStores extends StatelessWidget {

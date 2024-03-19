@@ -27,6 +27,7 @@ class DineInWidget extends StatelessWidget {
             title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 11.sp,
                 fontWeight: FontWeight.w600,
