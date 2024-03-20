@@ -3,11 +3,11 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:groccery_app/constants.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carousel_slider/carousel_options.dart';
+import 'package:groccery_app/model/recipe_model.dart';
 import 'package:groccery_app/widget/header_widget.dart';
 import 'package:groccery_app/widget/popular_section.dart';
 import 'package:groccery_app/widget/home_page_banner.dart';
@@ -24,30 +24,35 @@ class FoodPage extends StatefulWidget {
 }
 
 class _ListPage extends State<FoodPage> {
-  // List<ProductDetails> productDetails = [];
-  // Future<void> fetchAlbum() async {
-  //   try {
-  //     // final response_ = http.post(Uri.parse('dumy'),body: {"key":"Mitran"});
-  //     final response =
-  //         await http.get(Uri.parse('https://dummyjson.com/products'));
-  //     print('Response status code: ${response.statusCode}');
-  //     logger.w('Response body: ${response.body}');
-  //     if (response.statusCode == 200) {
-  //       productDetails = List<Map<String, dynamic>>.from(
-  //               json.decode(response.body)['products'])
-  //           .map((item) => ProductDetails.fromJson(item))
-  //           .toList();
-  //       setState(() {
-  //         productDetails = productDetails;
-  //       });
-  //       print('First product details: ${productDetails.length}');
-  //     } else {
-  //       throw Exception('Failed to load data: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
+  List<Recipe>? recipesList = [];
+  Future<void> fetchAlbum() async {
+    try {
+      var response = await http.get(Uri.parse('https://dummyjson.com/recipes'));
+      logger.e('Response status code: ${response.statusCode}');
+      logger.w('Response body: ${response.body}');
+      if (response.statusCode == 200) {
+        recipesList =
+            List<Map<String, dynamic>>.from(response.body)
+                .map((item) => Recipe.fromJson(item))
+                .toList();
+        setState(() {
+          recipesList;
+        });
+        logger.e('First product details: ${recipesList!.length}');
+      } else {
+        throw Exception('Failed to load data: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAlbum();
+  }
+
   List<Map<String, dynamic>> foodCatogory = [
     {
       "title": "Pizza",
@@ -184,213 +189,175 @@ class _ListPage extends State<FoodPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 10.sp),
-                child: const HeaderWidget(),
-              ),
-              Gap(1.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child: SearchbarWidget(),
-              ),
-              Gap(2.h),
-              SizedBox(
-                height: 15.h,
-                child: ListView.builder(
-                    padding: EdgeInsets.only(
-                      left: 3.w,
-                    ),
-                    itemCount: foodCatogory.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => FoodDetailPage()));
-                              },
-                              child: CircleAvatar(
-                                maxRadius: 24.sp,
-                                backgroundColor: const Color(0xFFf0f0f1),
-                                child: CachedNetworkImage(
-                                    fit: BoxFit.contain,
-                                    height: 6.h,
-                                    imageUrl: foodCatogory[index]["imgUrl"]),
+        body: RefreshIndicator(
+          onRefresh: () => fetchAlbum(),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 3.w, vertical: 10.sp),
+                  child: const HeaderWidget(),
+                ),
+                Gap(1.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w),
+                  child: SearchbarWidget(),
+                ),
+                Gap(2.h),
+                SizedBox(
+                  height: 15.h,
+                  child: ListView.builder(
+                      padding: EdgeInsets.only(
+                        left: 3.w,
+                      ),
+                      itemCount: foodCatogory.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5.sp),
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => FoodDetailPage()));
+                                },
+                                child: CircleAvatar(
+                                  maxRadius: 24.sp,
+                                  backgroundColor: const Color(0xFFf0f0f1),
+                                  child: CachedNetworkImage(
+                                      fit: BoxFit.contain,
+                                      height: 6.h,
+                                      imageUrl: foodCatogory[index]["imgUrl"]),
+                                ),
                               ),
-                            ),
-                            Gap(1.h),
-                            SizedBox(
-                              width: 15.w,
-                              child: Text(
-                                foodCatogory[index]["title"],
-                                maxLines: 2,
-                                style: TextStyle(
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
+                              Gap(1.h),
+                              SizedBox(
+                                width: 15.w,
+                                child: Text(
+                                  foodCatogory[index]["title"],
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+                Gap(2.h),
+                SizedBox(
+                  height: 15.h,
+                  child: ListView.builder(
+                      padding: EdgeInsets.only(
+                        left: 3.w,
+                      ),
+                      itemCount: catogory.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5.sp),
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => FoodDetailPage()));
+                                },
+                                child: CircleAvatar(
+                                  maxRadius: 24.sp,
+                                  backgroundColor: const Color(0xFFf0f0f1),
+                                  child: CachedNetworkImage(
+                                      fit: BoxFit.contain,
+                                      height: 6.h,
+                                      imageUrl: catogory[index]["imgUrl"]),
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                      );
-                    }),
-              ),
-              Gap(2.h),
-              SizedBox(
-                height: 15.h,
-                child: ListView.builder(
-                    padding: EdgeInsets.only(
-                      left: 3.w,
-                    ),
-                    itemCount: catogory.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => FoodDetailPage()));
-                              },
-                              child: CircleAvatar(
-                                maxRadius: 24.sp,
-                                backgroundColor: const Color(0xFFf0f0f1),
-                                child: CachedNetworkImage(
-                                    fit: BoxFit.contain,
-                                    height: 6.h,
-                                    imageUrl: catogory[index]["imgUrl"]),
-                              ),
-                            ),
-                            Gap(1.h),
-                            SizedBox(
-                              width: 15.w,
-                              child: Text(
-                                catogory[index]["title"],
-                                maxLines: 2,
-                                style: TextStyle(
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    }),
-              ),
-              Gap(2.h),
-              CarouselSlider.builder(
-                itemCount: homebanner.length,
-                itemBuilder: (context, index, realIndex) {
-                  return HomePageBanner(
-                    colors: homebanner[index]["color"],
-                    off: homebanner[index]["off"],
-                    imageUrl: homebanner[index]["imgUrl"],
-                    positionedColor: homebanner[index]["positionedColor"],
-                    discript: homebanner[index]["discript"],
-                    kanmani: false,
-                  );
-                },
-                options: CarouselOptions(
-                  autoPlayCurve: Curves.easeInOutCubic,
-                  height: 18.h,
-                  viewportFraction: 0.95,
-                  initialPage: 0,
-                  autoPlay: true,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      currentIndex = index;
-                    });
+                              Gap(1.h),
+                              SizedBox(
+                                width: 15.w,
+                                child: Text(
+                                  catogory[index]["title"],
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+                Gap(2.h),
+                CarouselSlider.builder(
+                  itemCount: homebanner.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return HomePageBanner(
+                      colors: homebanner[index]["color"],
+                      off: homebanner[index]["off"],
+                      imageUrl: homebanner[index]["imgUrl"],
+                      positionedColor: homebanner[index]["positionedColor"],
+                      discript: homebanner[index]["discript"],
+                      kanmani: false,
+                    );
                   },
-                ),
-              ),
-              Gap(1.h),
-              DotsIndicator(
-                decorator: DotsDecorator(
-                    spacing: EdgeInsets.only(right: 5.sp),
-                    activeColor: const Color(0xFF1c2440),
-                    activeShape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.sp)),
-                    size: Size(5.sp, 3.sp),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.sp)),
-                    activeSize: Size(15.sp, 4.sp)),
-                dotsCount: 3,
-                position: currentIndex,
-              ),
-              Gap(2.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    "Top Rated Restaurants",
-                    style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.black),
+                  options: CarouselOptions(
+                    autoPlayCurve: Curves.easeInOutCubic,
+                    height: 18.h,
+                    viewportFraction: 0.95,
+                    initialPage: 0,
+                    autoPlay: true,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
                   ),
                 ),
-              ),
-              Gap(1.h),
-              SizedBox(
-                height: 35.h,
-                child: ListView.builder(
+                Gap(1.h),
+                DotsIndicator(
+                  decorator: DotsDecorator(
+                      spacing: EdgeInsets.only(right: 5.sp),
+                      activeColor: const Color(0xFF1c2440),
+                      activeShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.sp)),
+                      size: Size(5.sp, 3.sp),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.sp)),
+                      activeSize: Size(15.sp, 4.sp)),
+                  dotsCount: 3,
+                  position: currentIndex,
+                ),
+                Gap(2.h),
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: popularData.length,
-                  itemBuilder: (context, index) => PopularSection(
-                    salaar: true,
-                    title: popularData[index]["title"],
-                    description: popularData[index]["description"],
-                    timing: popularData[index]["timing"],
-                    imgUrl: popularData[index]["imgUrl"],
-                    favouriteIcon: Icon(
-                      Icons.favorite_outline,
-                      size: 19.sp,
-                      color: Colors.black,
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      "Top Rated Restaurants",
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black),
                     ),
                   ),
                 ),
-              ),
-              Gap(2.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    "Restaurants To Explore",
-                    style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.black),
-                  ),
-                ),
-              ),
-              Gap(1.h),
-              ...List.generate(
-                popularData.length,
-                (index) => Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => RestaurantPage()));
-                    },
-                    child: PopularSection(
+                Gap(1.h),
+                SizedBox(
+                  height: 35.h,
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: popularData.length,
+                    itemBuilder: (context, index) => PopularSection(
                       salaar: true,
-                      rrr: false,
-                      rating: '4.1',
-                      exploreTimings: popularData[index]["exploretiming"],
                       title: popularData[index]["title"],
                       description: popularData[index]["description"],
                       timing: popularData[index]["timing"],
@@ -403,9 +370,56 @@ class _ListPage extends State<FoodPage> {
                     ),
                   ),
                 ),
-              ),
-              Gap(2.h),
-            ],
+                Gap(2.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      "Restaurants To Explore",
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black),
+                    ),
+                  ),
+                ),
+                Gap(1.h),
+                ...List.generate(
+                  recipesList!.length,
+                  (index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => RestaurantPage()));
+                        },
+                        child: PopularSection(
+                          salaar: true,
+                          rrr: false,
+                          rating: recipesList![index].rating.toString(),
+                          exploreTimings:
+                              recipesList![index].prepTimeMinutes.toString(),
+                          title: recipesList![index].name.toString(),
+                          description:
+                              recipesList![index].instructions.toString(),
+                          timing:
+                              recipesList![index].cookTimeMinutes.toString(),
+                          imgUrl: recipesList![index].image.toString(),
+                          favouriteIcon: Icon(
+                            Icons.favorite_outline,
+                            size: 19.sp,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Gap(2.h),
+              ],
+            ),
           ),
         ),
       ),

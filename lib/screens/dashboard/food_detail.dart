@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:groccery_app/widget/popular_section.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/screens/dashboard/dinein_page.dart';
-import 'package:groccery_app/screens/dashboard/restaurant_page.dart';
 
 class FoodDetailPage extends StatefulWidget {
   @override

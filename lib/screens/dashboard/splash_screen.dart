@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
@@ -13,28 +14,44 @@ class _SpalashScreenState extends State<SpalashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => DashBoardScreen(0)));
+          MaterialPageRoute(builder: (context) => const DashBoardScreen(0)));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          backgroundColor: Color(0xFFe6470a),
-          body:Column(
-            children: [
-               Image.asset(
-            "assets/png/intro.png",
-            height: 7.h,
-          ),
-          Text("Grocery")
-            ],
-          )
-    
-          ),
+      child: SafeArea(
+        child: Scaffold(
+            backgroundColor: const Color(0xFFe6470a),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/png/splash.png",
+                    height: 40.h,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                Gap(2.h),
+                Text(
+                  "Grocery",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 45.sp),
+                ),
+                Gap(2.h),
+                CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ],
+            )),
+      ),
     );
   }
 }

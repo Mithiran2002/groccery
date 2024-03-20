@@ -1,5 +1,6 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -141,6 +142,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      systemNavigationBarColor: Colors.black,
+      statusBarColor: Colors.black,
+    ));
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -149,12 +154,12 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding:
                   EdgeInsets.only(left: 3.w, right: 3.w, top: 3.h, bottom: 1.h),
-              child: const HeaderWidget(),
+              child:  HeaderWidget(),
             ),
             Gap(2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
-              child:  SearchbarWidget(),
+              child:   SearchbarWidget(),
             ),
             Gap(2.h),
             Padding(
@@ -174,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                           "https://www.freepnglogos.com/uploads/burger-png/burger-png-png-images-yellow-images-12.png",
                       onTab: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DashBoardScreen(1)));
+                            builder: (context) => const DashBoardScreen(1)));
                       },
                     ),
                   ),
@@ -188,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                           "https://www.pngplay.com/wp-content/uploads/7/Grocery-Transparent-PNG.png",
                       onTab: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DashBoardScreen(2)));
+                            builder: (context) => const DashBoardScreen(2)));
                       },
                     ),
                   ),
