@@ -2,7 +2,7 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/widget/inputform_field.dart';
+import 'package:groccery_app/view/widget/inputform_field.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class CouponsPage extends StatelessWidget {

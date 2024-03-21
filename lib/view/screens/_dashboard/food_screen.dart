@@ -1,43 +1,48 @@
+import 'dart:math';
 import 'dart:convert';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:groccery_app/constants.dart';
+import 'package:groccery_app/utils/constants.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:groccery_app/model/recipe_model.dart';
-import 'package:groccery_app/widget/header_widget.dart';
-import 'package:groccery_app/widget/popular_section.dart';
-import 'package:groccery_app/widget/home_page_banner.dart';
-import 'package:groccery_app/widget/searchbar_widget.dart';
+import 'package:groccery_app/view/widget/header_widget.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
+import 'package:groccery_app/view/widget/home_page_banner.dart';
+import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/screens/dashboard/food_detail.dart';
-import 'package:groccery_app/screens/dashboard/restaurant_page.dart';
+import 'package:groccery_app/view/screens/home/food_detail.dart';
+import 'package:groccery_app/view/screens/home/restaurant_page.dart';
 
-class FoodPage extends StatefulWidget {
-  const FoodPage({super.key});
+class FoodScreen extends StatefulWidget {
+  const FoodScreen({super.key});
 
   @override
-  State<FoodPage> createState() => _ListPage();
+  State<FoodScreen> createState() => _ListPage();
 }
 
-class _ListPage extends State<FoodPage> {
+class _ListPage extends State<FoodScreen> {
   List<Recipe>? recipesList = [];
   Future<void> fetchAlbum() async {
     try {
       var response = await http.get(Uri.parse('https://dummyjson.com/recipes'));
-      logger.e('Response status code: ${response.statusCode}');
+      // logger.e('Response status code: ${response.statusCode}');
       logger.w('Response body: ${response.body}');
       if (response.statusCode == 200) {
-        recipesList =
-            List<Map<String, dynamic>>.from(response.body)
-                .map((item) => Recipe.fromJson(item))
-                .toList();
+        Map<String, dynamic> _result = jsonDecode(response.body);
+
+        List<Recipe> dummyrecipeslist =
+            List<Map<String, dynamic>>.from(_result['recipes']).map((item) {
+          return Recipe.fromJson(item);
+        }).toList();
+        // logger.e(dummyrecipeslist.length);
         setState(() {
-          recipesList;
+          recipesList = dummyrecipeslist;
         });
+
         logger.e('First product details: ${recipesList!.length}');
       } else {
         throw Exception('Failed to load data: ${response.statusCode}');
@@ -190,7 +195,9 @@ class _ListPage extends State<FoodPage> {
     return SafeArea(
       child: Scaffold(
         body: RefreshIndicator(
-          onRefresh: () => fetchAlbum(),
+          backgroundColor: Color(0xFFe6470a),
+          color: Colors.white,
+          onRefresh: () async => await fetchAlbum(),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -212,7 +219,7 @@ class _ListPage extends State<FoodPage> {
                       padding: EdgeInsets.only(
                         left: 3.w,
                       ),
-                      itemCount: foodCatogory.length,
+                      itemCount: recipesList!.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -228,9 +235,10 @@ class _ListPage extends State<FoodPage> {
                                   maxRadius: 24.sp,
                                   backgroundColor: const Color(0xFFf0f0f1),
                                   child: CachedNetworkImage(
-                                      fit: BoxFit.contain,
-                                      height: 6.h,
-                                      imageUrl: foodCatogory[index]["imgUrl"]),
+                                      fit: BoxFit.cover,
+                                      height: 5.h,
+                                      imageUrl:
+                                          recipesList![index].image.toString()),
                                 ),
                               ),
                               Gap(1.h),

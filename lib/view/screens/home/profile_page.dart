@@ -2,7 +2,7 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/widget/home_page_banner.dart';
+import 'package:groccery_app/view/widget/home_page_banner.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfilePage extends StatelessWidget {

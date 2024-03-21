@@ -1,18 +1,18 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/widget/custom_button.dart';
-import 'package:groccery_app/widget/inputform_field.dart';
-import 'package:groccery_app/screens/dashboard/cart_page.dart';
+import 'package:groccery_app/view/widget/custom_button.dart';
+import 'package:groccery_app/view/widget/inputform_field.dart';
+import 'package:groccery_app/view/screens/home/cart_page.dart';
 
-class ParcelService extends StatefulWidget {
-  const ParcelService({super.key});
+class ParcelServiceScreen extends StatefulWidget {
+  const ParcelServiceScreen({super.key});
 
   @override
-  State<ParcelService> createState() => ParcelServiceState();
+  State<ParcelServiceScreen> createState() => ParcelServiceScreenState();
 }
 
-class ParcelServiceState extends State<ParcelService> {
+class ParcelServiceScreenState extends State<ParcelServiceScreen> {
   bool? ischecked = true;
   List<String> text = [
     "Food Items",

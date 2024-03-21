@@ -3,7 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:groccery_app/widget/popular_section.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class FoodDetailPage extends StatefulWidget {

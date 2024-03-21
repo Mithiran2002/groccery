@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:groccery_app/widget/dinein_banner.dart';
-import 'package:groccery_app/widget/places_Widget.dart';
-import 'package:groccery_app/widget/dinein_widget.dart';
-import 'package:groccery_app/widget/header_widget.dart';
-import 'package:groccery_app/widget/popular_section.dart';
-import 'package:groccery_app/widget/searchbar_widget.dart';
+import 'package:groccery_app/view/widget/dinein_banner.dart';
+import 'package:groccery_app/view/widget/places_Widget.dart';
+import 'package:groccery_app/view/widget/dinein_widget.dart';
+import 'package:groccery_app/view/widget/header_widget.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
+import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class DineInPage extends StatefulWidget {
-  const DineInPage({super.key});
+class DineInScreen extends StatefulWidget {
+  const DineInScreen({super.key});
 
   @override
-  State<DineInPage> createState() => _DineInPageState();
+  State<DineInScreen> createState() => _DineInScreenState();
 }
 
 List<Map<String, dynamic>> dineCart = [
@@ -158,7 +158,7 @@ List<Map<String, dynamic>> banner = [
 ];
 int currentIndex = 0;
 
-class _DineInPageState extends State<DineInPage> {
+class _DineInScreenState extends State<DineInScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -173,7 +173,7 @@ class _DineInPageState extends State<DineInPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),
-                child:  SearchbarWidget(),
+                child: SearchbarWidget(),
               ),
               Gap(2.h),
               SizedBox(

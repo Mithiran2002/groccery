@@ -3,11 +3,11 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:groccery_app/widget/dinein_widget.dart';
-import 'package:groccery_app/widget/popular_section.dart';
-import 'package:groccery_app/screens/dashboard/all_stores.dart';
+import 'package:groccery_app/view/widget/dinein_widget.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/screens/dashboard/fruits_page.dart';
+import 'package:groccery_app/view/screens/home/all_stores.dart';
+import 'package:groccery_app/view/screens/home/fruits_page.dart';
 
 // ignore: must_be_immutable
 class RelianceSmart extends StatelessWidget {

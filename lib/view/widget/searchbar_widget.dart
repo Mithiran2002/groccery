@@ -1,6 +1,6 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/screens/dashboard/searchbar_page.dart';
+import 'package:groccery_app/view/screens/home/searchbar_page.dart';
 
 class SearchbarWidget extends StatelessWidget {
   final bool? search;

@@ -3,23 +3,23 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:groccery_app/widget/mart_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:groccery_app/widget/category_card.dart';
-import 'package:groccery_app/widget/header_widget.dart';
-import 'package:groccery_app/widget/popular_section.dart';
-import 'package:groccery_app/widget/home_page_banner.dart';
-import 'package:groccery_app/widget/searchbar_widget.dart';
-import 'package:groccery_app/screens/dashboard/all_stores.dart';
+import 'package:groccery_app/view/widget/mart_widget.dart';
+import 'package:groccery_app/view/widget/category_card.dart';
+import 'package:groccery_app/view/widget/header_widget.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
+import 'package:groccery_app/view/widget/home_page_banner.dart';
+import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/screens/dashboard/groccery_page.dart';
+import 'package:groccery_app/view/screens/home/all_stores.dart';
+import 'package:groccery_app/view/screens/home/groccery_page.dart';
 
-class MartPage extends StatefulWidget {
+class MartScreen extends StatefulWidget {
   @override
-  State<MartPage> createState() => _MartPageState();
+  State<MartScreen> createState() => _MartScreenState();
 }
 
-class _MartPageState extends State<MartPage> {
+class _MartScreenState extends State<MartScreen> {
   List<Map<String, dynamic>> homebanner = [
     {
       "off": "25% Off",

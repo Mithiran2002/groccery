@@ -3,14 +3,14 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:groccery_app/widget/mart_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:groccery_app/widget/popular_section.dart';
-import 'package:groccery_app/widget/home_page_banner.dart';
-import 'package:groccery_app/widget/searchbar_widget.dart';
-import 'package:groccery_app/screens/dashboard/all_stores.dart';
+import 'package:groccery_app/view/widget/mart_widget.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
+import 'package:groccery_app/view/widget/home_page_banner.dart';
+import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/screens/dashboard/food_detail.dart';
+import 'package:groccery_app/view/screens/home/all_stores.dart';
+import 'package:groccery_app/view/screens/home/food_detail.dart';
 
 class GrocceryPage extends StatefulWidget {
   const GrocceryPage({super.key});

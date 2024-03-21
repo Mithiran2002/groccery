@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/screens/dashboard/dashboard_screen.dart';
+import 'package:groccery_app/view/screens/_dashboard/dashboard_screen.dart';
 
 class SpalashScreen extends StatefulWidget {
   @override
@@ -37,7 +36,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
                     fit: BoxFit.fitHeight,
                   ),
                 ),
-                Gap(2.h),
+                Gap(3.h),
                 Text(
                   "Grocery",
                   style: TextStyle(
@@ -45,7 +44,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
                       fontWeight: FontWeight.w700,
                       fontSize: 45.sp),
                 ),
-                Gap(2.h),
+                Gap(5.h),
                 CircularProgressIndicator(
                   color: Colors.white,
                 ),

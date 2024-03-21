@@ -1,6 +1,6 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/screens/dashboard/splash_screen.dart';
+import 'package:groccery_app/view/screens/home/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

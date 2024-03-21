@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:groccery_app/screens/dashboard/home_page.dart';
-import 'package:groccery_app/screens/dashboard/food_page.dart';
-import 'package:groccery_app/screens/dashboard/mart_page.dart';
-import 'package:groccery_app/screens/dashboard/dinein_page.dart';
-import 'package:groccery_app/screens/dashboard/parcel_service.dart';
+import 'package:groccery_app/view/screens/_dashboard/food_screen.dart';
+import 'package:groccery_app/view/screens/_dashboard/home_screen.dart';
+import 'package:groccery_app/view/screens/_dashboard/mart_screen.dart';
+import 'package:groccery_app/view/screens/_dashboard/dinein_screen.dart';
+import 'package:groccery_app/view/screens/_dashboard/parcel_service_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
   final int? index;
@@ -78,15 +78,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget switchcaseFun() {
     switch (selectedIndex) {
       case 0:
-        return HomePage();
+        return HomeScreen();
       case 1:
-        return const FoodPage();
+        return const FoodScreen();
       case 2:
-        return MartPage();
+        return MartScreen();
       case 3:
-        return const DineInPage();
+        return const DineInScreen();
       case 4:
-        return ParcelService();
+        return const ParcelServiceScreen();
       default:
         return Container();
     }

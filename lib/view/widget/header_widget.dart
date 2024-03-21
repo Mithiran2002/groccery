@@ -2,7 +2,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:groccery_app/screens/dashboard/profile_page.dart';
+import 'package:groccery_app/view/screens/home/profile_page.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});

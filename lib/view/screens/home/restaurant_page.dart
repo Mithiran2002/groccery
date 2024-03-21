@@ -2,10 +2,10 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/widget/food_list.dart';
 import 'package:input_quantity/input_quantity.dart';
-import 'package:groccery_app/widget/custom_button.dart';
-import 'package:groccery_app/screens/dashboard/cart_page.dart';
+import 'package:groccery_app/view/widget/food_list.dart';
+import 'package:groccery_app/view/widget/custom_button.dart';
+import 'package:groccery_app/view/screens/home/cart_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RestaurantPage extends StatefulWidget {

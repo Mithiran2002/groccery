@@ -4,23 +4,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:groccery_app/widget/header_widget.dart';
-import 'package:groccery_app/widget/category_card.dart';
-import 'package:groccery_app/widget/popular_section.dart';
-import 'package:groccery_app/widget/searchbar_widget.dart';
-import 'package:groccery_app/widget/home_page_banner.dart';
-import 'package:groccery_app/screens/dashboard/mart_page.dart';
-import 'package:groccery_app/screens/dashboard/food_page.dart';
-import 'package:groccery_app/screens/dashboard/dashboard_screen.dart';
+import 'package:groccery_app/view/widget/header_widget.dart';
+import 'package:groccery_app/view/widget/category_card.dart';
+import 'package:groccery_app/view/widget/popular_section.dart';
+import 'package:groccery_app/view/widget/searchbar_widget.dart';
+import 'package:groccery_app/view/widget/home_page_banner.dart';
+import 'package:groccery_app/view/screens/_dashboard/dashboard_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   int currentIndex = 0;
+
+  HomeScreen({super.key});
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   int currentindex = 0;
   List<Map<String, dynamic>> popularData = [
     {
@@ -154,12 +154,12 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding:
                   EdgeInsets.only(left: 3.w, right: 3.w, top: 3.h, bottom: 1.h),
-              child:  HeaderWidget(),
+              child: HeaderWidget(),
             ),
             Gap(2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
-              child:   SearchbarWidget(),
+              child: SearchbarWidget(),
             ),
             Gap(2.h),
             Padding(
