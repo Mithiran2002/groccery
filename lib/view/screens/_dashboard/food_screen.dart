@@ -1,8 +1,6 @@
-import 'dart:math';
 import 'dart:convert';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:groccery_app/utils/constants.dart';
@@ -17,6 +15,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/view/screens/home/food_detail.dart';
 import 'package:groccery_app/view/screens/home/restaurant_page.dart';
 
+
 class FoodScreen extends StatefulWidget {
   const FoodScreen({super.key});
 
@@ -26,6 +25,7 @@ class FoodScreen extends StatefulWidget {
 
 class _ListPage extends State<FoodScreen> {
   List<Recipe>? recipesList = [];
+  List<Recipe>? foodlist = [];
   Future<void> fetchAlbum() async {
     try {
       var response = await http.get(Uri.parse('https://dummyjson.com/recipes'));
@@ -41,6 +41,7 @@ class _ListPage extends State<FoodScreen> {
         // logger.e(dummyrecipeslist.length);
         setState(() {
           recipesList = dummyrecipeslist;
+          foodlist = dummyrecipeslist.reversed.toList();
         });
 
         logger.e('First product details: ${recipesList!.length}');
@@ -195,7 +196,7 @@ class _ListPage extends State<FoodScreen> {
     return SafeArea(
       child: Scaffold(
         body: RefreshIndicator(
-          backgroundColor: Color(0xFFe6470a),
+          backgroundColor: const Color(0xFFe6470a),
           color: Colors.white,
           onRefresh: () async => await fetchAlbum(),
           child: SingleChildScrollView(
@@ -210,7 +211,7 @@ class _ListPage extends State<FoodScreen> {
                 Gap(1.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: SearchbarWidget(),
+                  child: const SearchbarWidget(),
                 ),
                 Gap(2.h),
                 SizedBox(
@@ -234,19 +235,21 @@ class _ListPage extends State<FoodScreen> {
                                 child: CircleAvatar(
                                   maxRadius: 24.sp,
                                   backgroundColor: const Color(0xFFf0f0f1),
-                                  child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      height: 5.h,
-                                      imageUrl:
-                                          recipesList![index].image.toString()),
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      recipesList![index].image.toString()),
+                                  // child: CachedNetworkImage(
+                                  //     fit: BoxFit.cover,
+                                  //     imageUrl:
+                                  //         recipesList![index].image.toString()),
                                 ),
                               ),
                               Gap(1.h),
                               SizedBox(
-                                width: 15.w,
+                                width: 14.w,
                                 child: Text(
-                                  foodCatogory[index]["title"],
+                                  recipesList![index].name.toString(),
                                   maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.w600,
@@ -265,7 +268,7 @@ class _ListPage extends State<FoodScreen> {
                       padding: EdgeInsets.only(
                         left: 3.w,
                       ),
-                      itemCount: catogory.length,
+                      itemCount: foodlist!.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -280,18 +283,17 @@ class _ListPage extends State<FoodScreen> {
                                 child: CircleAvatar(
                                   maxRadius: 24.sp,
                                   backgroundColor: const Color(0xFFf0f0f1),
-                                  child: CachedNetworkImage(
-                                      fit: BoxFit.contain,
-                                      height: 6.h,
-                                      imageUrl: catogory[index]["imgUrl"]),
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      foodlist![index].image.toString()),
                                 ),
                               ),
                               Gap(1.h),
                               SizedBox(
-                                width: 15.w,
+                                width: 14.w,
                                 child: Text(
-                                  catogory[index]["title"],
+                                  foodlist![index].name.toString(),
                                   maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w600,
@@ -363,13 +365,13 @@ class _ListPage extends State<FoodScreen> {
                   child: ListView.builder(
                     padding: EdgeInsets.symmetric(horizontal: 3.w),
                     scrollDirection: Axis.horizontal,
-                    itemCount: popularData.length,
+                    itemCount: foodlist!.length,
                     itemBuilder: (context, index) => PopularSection(
                       salaar: true,
-                      title: popularData[index]["title"],
-                      description: popularData[index]["description"],
-                      timing: popularData[index]["timing"],
-                      imgUrl: popularData[index]["imgUrl"],
+                      title: foodlist![index].name.toString(),
+                      description: foodlist![index].mealType.toString(),
+                      timing: foodlist![index].cookTimeMinutes.toString(),
+                      imgUrl: foodlist![index].image.toString(),
                       favouriteIcon: Icon(
                         Icons.favorite_outline,
                         size: 19.sp,
@@ -401,7 +403,9 @@ class _ListPage extends State<FoodScreen> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => RestaurantPage()));
+                              builder: (context) => RestaurantPage(
+                                    id: recipesList![index].id,
+                                  )));
                         },
                         child: PopularSection(
                           salaar: true,

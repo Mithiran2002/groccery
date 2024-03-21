@@ -1,14 +1,20 @@
+import 'dart:convert';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:input_quantity/input_quantity.dart';
+import 'package:http/http.dart' as http;
+import 'package:groccery_app/utils/constants.dart';
+import 'package:groccery_app/model/recipe_model.dart';
+import 'package:groccery_app/model/catogory_model.dart';
 import 'package:groccery_app/view/widget/food_list.dart';
 import 'package:groccery_app/view/widget/custom_button.dart';
 import 'package:groccery_app/view/screens/home/cart_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RestaurantPage extends StatefulWidget {
+  int? id;
+  RestaurantPage({super.key, required this.id});
+
   @override
   State<RestaurantPage> createState() => _RestaurantPageState();
 }
@@ -86,97 +92,136 @@ class _RestaurantPageState extends State<RestaurantPage> {
       "intvalue": "23",
     },
   ];
+  Catogory? product;
+  Future<void> getProduct() async {
+    try {
+      var response = await http.get(
+        Uri.parse(
+          'https://dummyjson.com/products/${widget.id}',
+        ),
+      );
+      // logger.w('Response body: ${response.body}');
+      if (response.statusCode == 200) {
+        Map<String, dynamic> result = jsonDecode(response.body);
+        Catogory dummyCatogory = Catogory.fromJson(result);
+
+        setState(() {
+          product = dummyCatogory;
+        });
+        logger.w("Catogory Data:${product!.toJson()}");
+      } else {
+        throw Exception('Failed to load data: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  @override
+  void initState() {
+    logger.w('The ID :: ${widget.id}');
+    getProduct();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.sp)),
-          backgroundColor: Color(0xFFe6470a),
-          onPressed: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.sp)),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 3.w, vertical: 2.h),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Menu",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 19.sp,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      icon: Icon(
-                                        Icons.cancel_outlined,
-                                        size: 19.sp,
-                                        color: Colors.black,
-                                      )),
-                                ],
+      floatingActionButton: Visibility(
+        visible: true,
+        child: FloatingActionButton.extended(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.sp)),
+            backgroundColor: const Color(0xFFe6470a),
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.sp)),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 3.w, vertical: 2.h),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Menu",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 19.sp,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        icon: Icon(
+                                          Icons.cancel_outlined,
+                                          size: 19.sp,
+                                          color: Colors.black,
+                                        )),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 50.h,
-                              width: 100.w,
-                              child: ListView.builder(
-                                  itemCount: bottom.length,
-                                  itemBuilder: ((context, index) {
-                                    return ListTile(
-                                      title: Text(
-                                        bottom[index]['title'],
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      trailing: Text(
-                                        bottom[index]['intvalue'],
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    );
-                                  })),
-                            ),
-                            Gap(1.h),
-                          ],
-                        ),
-                      ));
-                });
-          },
-          label: Text(
-            "Menu",
-            style: TextStyle(color: Colors.white, fontSize: 12.sp),
-          )),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            imgSection(),
-            Gap(1.5.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.w),
-              child: titleSection(),
-            ),
-          ],
-        ),
+                              SizedBox(
+                                height: 50.h,
+                                width: 100.w,
+                                child: ListView.builder(
+                                    itemCount: bottom.length,
+                                    itemBuilder: ((context, index) {
+                                      return ListTile(
+                                        title: Text(
+                                          bottom[index]['title'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        trailing: Text(
+                                          bottom[index]['intvalue'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      );
+                                    })),
+                              ),
+                              Gap(1.h),
+                            ],
+                          ),
+                        ));
+                  });
+            },
+            label: Text(
+              "Menu",
+              style: TextStyle(color: Colors.white, fontSize: 12.sp),
+            )),
       ),
+      body: product?.images?.last != null
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  imgSection(),
+                  Gap(1.5.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2.w),
+                    child: titleSection(),
+                  ),
+                ],
+              ),
+            )
+          :    Center(
+              child: CircularProgressIndicator(backgroundColor: Color(0xFFe6470a),color: Colors.black,),
+            ),
     ));
   }
 
@@ -186,9 +231,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
         CachedNetworkImage(
             height: 30.h,
             width: 100.w,
-            fit: BoxFit.fitWidth,
-            imageUrl:
-                "https://thumbs.dreamstime.com/b/pizza-rustic-italian-mozzarella-cheese-basil-leaves-35669930.jpg"),
+            fit: BoxFit.fitHeight,
+            imageUrl: product!.images!.last),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
           child: Row(
@@ -232,7 +276,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Pizza",
+            product?.brand ?? "",
             style: TextStyle(
                 fontSize: 23.sp,
                 fontWeight: FontWeight.w900,
@@ -245,21 +289,21 @@ class _RestaurantPageState extends State<RestaurantPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Pizza|cheese|chicken",
+                product!.price.toString(),
                 style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.black),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Icon(
               Icons.star,
               size: 12.sp,
               color: Colors.yellow,
             ),
             Text(
-              "4.5(7.4k Rating)",
+              product!.rating.toString(),
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 12.sp,
@@ -279,7 +323,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
           ),
         ),
         Gap(2.h),
-        Divider(),
+        const Divider(),
         Gap(2.h),
         Row(
           children: [
