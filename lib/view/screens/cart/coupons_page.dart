@@ -165,7 +165,6 @@ class CouponsPage extends StatelessWidget {
             ),
           ),
         ),
-        
       ),
     );
   }

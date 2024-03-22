@@ -1,9 +1,12 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:groccery_app/utils/constants.dart';
+import 'package:groccery_app/model/auth_login.dart';
+import 'package:groccery_app/service/api_service.dart';
 import 'package:groccery_app/view/widget/custom_button.dart';
+import 'package:groccery_app/view/screens/cart/cart_page.dart';
 import 'package:groccery_app/view/widget/inputform_field.dart';
-import 'package:groccery_app/view/screens/home/cart_page.dart';
 
 class ParcelServiceScreen extends StatefulWidget {
   const ParcelServiceScreen({super.key});
@@ -14,6 +17,21 @@ class ParcelServiceScreen extends StatefulWidget {
 
 class ParcelServiceScreenState extends State<ParcelServiceScreen> {
   bool? ischecked = true;
+  Login? result;
+  Future<void> authLogin(String username, String pwd) async {
+    try {
+      Map<String, dynamic> _response =
+          await ApiService.post(slug: ApiConstants.AUTH_ENDPOINT, data: {
+        "username": username,
+        "password": pwd,
+      });
+      setState(() {
+        result = Login.fromJson(_response);
+      });
+      logger.i(result!.toJson());
+    } catch (e) {}
+  }
+
   List<String> text = [
     "Food Items",
     "Medicines",
@@ -22,21 +40,14 @@ class ParcelServiceScreenState extends State<ParcelServiceScreen> {
     "Cloths|Accessories",
     "Others",
   ];
+  TextEditingController userNameCtr = TextEditingController();
+  TextEditingController passwordCtr = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                size: 20.sp,
-                color: Colors.white,
-              )),
           title: const Text("Parcel Service"),
           titleTextStyle:
               TextStyle(fontSize: 23.sp, fontWeight: FontWeight.w600),
@@ -50,20 +61,40 @@ class ParcelServiceScreenState extends State<ParcelServiceScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Pickup address",
+                  "User Name",
                   style:
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
                 Gap(1.h),
-                InputFormField(title: "Enter pickup location"),
+                InputFormField(
+                  controller: userNameCtr,
+                  title: "Enter User name",
+                  onValidate: (value) {
+                    if (value!.isNotEmpty) {
+                      logger.d(userNameCtr.value.text);
+                    } else {
+                      return 'userName is required';
+                    }
+                  },
+                ),
                 Gap(3.h),
                 Text(
-                  "Delivery address",
+                  "Password",
                   style:
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
                 Gap(1.h),
-                InputFormField(title: "Enter Deivery Location"),
+                InputFormField(
+                  controller: passwordCtr,
+                  title: "Enter Deivery Location",
+                  onValidate: (value) {
+                    if (value!.isNotEmpty) {
+                      logger.d(passwordCtr.value.text);
+                    } else {
+                      return 'password is required';
+                    }
+                  },
+                ),
                 Gap(3.h),
                 Text(
                   "Parcel Type",
@@ -188,9 +219,15 @@ class ParcelServiceScreenState extends State<ParcelServiceScreen> {
                 Gap(8.h),
                 CustomButton(
                     text: "Continue",
-                    onTab: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => CartPage()));
+                    onTab: () async {
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => CartPage()));
+                      if (userNameCtr.text.isNotEmpty &&
+                          passwordCtr.text.isNotEmpty) {
+                        await authLogin(userNameCtr.text, passwordCtr.text);
+                      } else {
+                        logger.d("username or password is empty");
+                      }
                     })
               ],
             ),

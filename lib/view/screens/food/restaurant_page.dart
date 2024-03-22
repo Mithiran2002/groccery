@@ -8,7 +8,7 @@ import 'package:groccery_app/model/recipe_model.dart';
 import 'package:groccery_app/model/catogory_model.dart';
 import 'package:groccery_app/view/widget/food_list.dart';
 import 'package:groccery_app/view/widget/custom_button.dart';
-import 'package:groccery_app/view/screens/home/cart_page.dart';
+import 'package:groccery_app/view/screens/cart/cart_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RestaurantPage extends StatefulWidget {
@@ -92,12 +92,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
       "intvalue": "23",
     },
   ];
-  Catogory? product;
+  Catogory? foods;
   Future<void> getProduct() async {
     try {
       var response = await http.get(
         Uri.parse(
-          'https://dummyjson.com/products/${widget.id}',
+          'https://dummyjson.com/recipes/${widget.id}',
         ),
       );
       // logger.w('Response body: ${response.body}');
@@ -106,9 +106,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
         Catogory dummyCatogory = Catogory.fromJson(result);
 
         setState(() {
-          product = dummyCatogory;
+          foods = dummyCatogory;
         });
-        logger.w("Catogory Data:${product!.toJson()}");
+        logger.w("Catogory Data:${foods!.toJson()}");
       } else {
         throw Exception('Failed to load data: ${response.statusCode}');
       }
@@ -128,85 +128,82 @@ class _RestaurantPageState extends State<RestaurantPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      floatingActionButton: Visibility(
-        visible: true,
-        child: FloatingActionButton.extended(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.sp)),
-            backgroundColor: const Color(0xFFe6470a),
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.sp)),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 3.w, vertical: 2.h),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Menu",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 19.sp,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        icon: Icon(
-                                          Icons.cancel_outlined,
-                                          size: 19.sp,
-                                          color: Colors.black,
-                                        )),
-                                  ],
-                                ),
+      floatingActionButton: FloatingActionButton.extended(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.sp)),
+          backgroundColor: const Color(0xFFe6470a),
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15.sp)),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w, vertical: 2.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Menu",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 19.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: Icon(
+                                        Icons.cancel_outlined,
+                                        size: 19.sp,
+                                        color: Colors.black,
+                                      )),
+                                ],
                               ),
-                              SizedBox(
-                                height: 50.h,
-                                width: 100.w,
-                                child: ListView.builder(
-                                    itemCount: bottom.length,
-                                    itemBuilder: ((context, index) {
-                                      return ListTile(
-                                        title: Text(
-                                          bottom[index]['title'],
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        trailing: Text(
-                                          bottom[index]['intvalue'],
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      );
-                                    })),
-                              ),
-                              Gap(1.h),
-                            ],
-                          ),
-                        ));
-                  });
-            },
-            label: Text(
-              "Menu",
-              style: TextStyle(color: Colors.white, fontSize: 12.sp),
-            )),
-      ),
-      body: product?.images?.last != null
+                            ),
+                            SizedBox(
+                              height: 50.h,
+                              width: 100.w,
+                              child: ListView.builder(
+                                  itemCount: bottom.length,
+                                  itemBuilder: ((context, index) {
+                                    return ListTile(
+                                      title: Text(
+                                        bottom[index]['title'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      trailing: Text(
+                                        bottom[index]['intvalue'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    );
+                                  })),
+                            ),
+                            Gap(1.h),
+                          ],
+                        ),
+                      ));
+                });
+          },
+          label: Text(
+            "Menu",
+            style: TextStyle(color: Colors.white, fontSize: 12.sp),
+          )),
+      body: foods?.image != null
           ? SingleChildScrollView(
               child: Column(
                 children: [
@@ -219,8 +216,11 @@ class _RestaurantPageState extends State<RestaurantPage> {
                 ],
               ),
             )
-          :    Center(
-              child: CircularProgressIndicator(backgroundColor: Color(0xFFe6470a),color: Colors.black,),
+          :   Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Color(0xFFe6470a),
+                color: Colors.black,
+              ),
             ),
     ));
   }
@@ -231,8 +231,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
         CachedNetworkImage(
             height: 30.h,
             width: 100.w,
-            fit: BoxFit.fitHeight,
-            imageUrl: product!.images!.last),
+            fit: BoxFit.fitWidth,
+            imageUrl: foods!.image.toString()),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
           child: Row(
@@ -276,9 +276,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            product?.brand ?? "",
+            foods!.name.toString(),
             style: TextStyle(
-                fontSize: 23.sp,
+                fontSize: 17.sp,
                 fontWeight: FontWeight.w900,
                 color: Colors.black),
           ),
@@ -289,7 +289,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                product!.price.toString(),
+                foods!.mealType.toString(),
                 style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
@@ -303,7 +303,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
               color: Colors.yellow,
             ),
             Text(
-              product!.rating.toString(),
+              foods!.rating.toString(),
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 12.sp,
@@ -315,7 +315,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Btm Layout|1km|38 mins Delivery",
+            foods!.prepTimeMinutes.toString(),
             style: TextStyle(
                 fontSize: 9.sp,
                 fontWeight: FontWeight.w600,

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/view/screens/_dashboard/dashboard_screen.dart';
+import 'package:groccery_app/view/screens/dashboard_screen.dart';
 
 class SpalashScreen extends StatefulWidget {
   @override

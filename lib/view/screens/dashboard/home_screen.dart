@@ -9,7 +9,7 @@ import 'package:groccery_app/view/widget/category_card.dart';
 import 'package:groccery_app/view/widget/popular_section.dart';
 import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:groccery_app/view/widget/home_page_banner.dart';
-import 'package:groccery_app/view/screens/_dashboard/dashboard_screen.dart';
+import 'package:groccery_app/view/screens/dashboard_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {

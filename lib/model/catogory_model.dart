@@ -1,61 +1,85 @@
 import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final catogory = catogoryFromJson(jsonString);
+
+
+Catogory catogoryFromJson(String str) => Catogory.fromJson(json.decode(str));
+
+String catogoryToJson(Catogory data) => json.encode(data.toJson());
 
 class Catogory {
     final int? id;
-    final String? title;
-    final String? description;
-    final int? price;
-    final double? discountPercentage;
+    final String? name;
+    final List<String> ingredients;
+    final List<String> instructions;
+    final int? prepTimeMinutes;
+    final int? cookTimeMinutes;
+    final int ?servings;
+    final String? difficulty;
+    final String ?cuisine;
+    final int? caloriesPerServing;
+    final List<String> tags;
+    final int? userId;
+    final String ?image;
     final double? rating;
-    final int? stock;
-    final String? brand;
-    final String? category;
-    final String? thumbnail;
-    final List<String>? images;
+    final int? reviewCount;
+    final List<String> mealType;
 
     Catogory({
-        this.id,
-        this.title,
-        this.description,
-        this.price,
-        this.discountPercentage,
-        this.rating,
-        this.stock,
-        this.brand,
-        this.category,
-        this.thumbnail,
-        this.images,
+        required this.id,
+        required this.name,
+        required this.ingredients,
+        required this.instructions,
+        required this.prepTimeMinutes,
+        required this.cookTimeMinutes,
+        required this.servings,
+        required this.difficulty,
+        required this.cuisine,
+        required this.caloriesPerServing,
+        required this.tags,
+        required this.userId,
+        required this.image,
+        required this.rating,
+        required this.reviewCount,
+        required this.mealType,
     });
-
-    factory Catogory.fromRawJson(String str) => Catogory.fromJson(json.decode(str));
-
-    String toRawJson() => json.encode(toJson());
 
     factory Catogory.fromJson(Map<String, dynamic> json) => Catogory(
         id: json["id"],
-        title: json["title"],
-        description: json["description"],
-        price: json["price"],
-        discountPercentage: json["discountPercentage"]?.toDouble(),
+        name: json["name"],
+        ingredients: List<String>.from(json["ingredients"].map((x) => x)),
+        instructions: List<String>.from(json["instructions"].map((x) => x)),
+        prepTimeMinutes: json["prepTimeMinutes"],
+        cookTimeMinutes: json["cookTimeMinutes"],
+        servings: json["servings"],
+        difficulty: json["difficulty"],
+        cuisine: json["cuisine"],
+        caloriesPerServing: json["caloriesPerServing"],
+        tags: List<String>.from(json["tags"].map((x) => x)),
+        userId: json["userId"],
+        image: json["image"],
         rating: json["rating"]?.toDouble(),
-        stock: json["stock"],
-        brand: json["brand"],
-        category: json["category"],
-        thumbnail: json["thumbnail"],
-        images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
+        reviewCount: json["reviewCount"],
+        mealType: List<String>.from(json["mealType"].map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "title": title,
-        "description": description,
-        "price": price,
-        "discountPercentage": discountPercentage,
+        "name": name,
+        "ingredients": List<dynamic>.from(ingredients.map((x) => x)),
+        "instructions": List<dynamic>.from(instructions.map((x) => x)),
+        "prepTimeMinutes": prepTimeMinutes,
+        "cookTimeMinutes": cookTimeMinutes,
+        "servings": servings,
+        "difficulty": difficulty,
+        "cuisine": cuisine,
+        "caloriesPerServing": caloriesPerServing,
+        "tags": List<dynamic>.from(tags.map((x) => x)),
+        "userId": userId,
+        "image": image,
         "rating": rating,
-        "stock": stock,
-        "brand": brand,
-        "category": category,
-        "thumbnail": thumbnail,
-        "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
+        "reviewCount": reviewCount,
+        "mealType": List<dynamic>.from(mealType.map((x) => x)),
     };
 }

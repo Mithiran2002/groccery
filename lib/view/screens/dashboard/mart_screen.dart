@@ -11,8 +11,8 @@ import 'package:groccery_app/view/widget/popular_section.dart';
 import 'package:groccery_app/view/widget/home_page_banner.dart';
 import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/view/screens/home/all_stores.dart';
-import 'package:groccery_app/view/screens/home/groccery_page.dart';
+import 'package:groccery_app/view/screens/mart/all_stores.dart';
+import 'package:groccery_app/view/screens/mart/groccery_page.dart';
 
 class MartScreen extends StatefulWidget {
   @override

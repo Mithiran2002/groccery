@@ -6,23 +6,26 @@ class InputFormField extends StatelessWidget {
   final String title;
   final bool? readonly;
   final void Function()? onTap;
+  final  Function(String?)? onValidate;
   final Widget? suffixIcon;
-  TextEditingController controller = TextEditingController();
+  final TextEditingController? controller;
 
-  InputFormField({
-    super.key,
-    required this.title,
-    this.onTap,
-    this.suffixIcon,
-    this.readonly,
-  });
+  InputFormField(
+      {super.key,
+      required this.title,
+ this.onValidate,
+      this.onTap,
+      this.suffixIcon,
+      this.readonly,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      readOnly:readonly ?? false ,
+      readOnly: readonly ?? false,
       onTap: onTap,
       controller: controller,
+      validator: (value){},
       decoration: InputDecoration(
         hintText: title,
         hintStyle: TextStyle(

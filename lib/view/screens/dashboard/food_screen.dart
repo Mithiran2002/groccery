@@ -7,122 +7,77 @@ import 'package:groccery_app/utils/constants.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:groccery_app/model/recipe_model.dart';
+import 'package:groccery_app/service/api_service.dart';
 import 'package:groccery_app/view/widget/header_widget.dart';
 import 'package:groccery_app/view/widget/popular_section.dart';
 import 'package:groccery_app/view/widget/home_page_banner.dart';
 import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/view/screens/home/food_detail.dart';
-import 'package:groccery_app/view/screens/home/restaurant_page.dart';
-
+import 'package:groccery_app/view/screens/food/food_detail.dart';
+import 'package:groccery_app/view/screens/food/restaurant_page.dart';
 
 class FoodScreen extends StatefulWidget {
   const FoodScreen({super.key});
 
   @override
-  State<FoodScreen> createState() => _ListPage();
+  State<FoodScreen> createState() => _FoodScreen();
 }
 
-class _ListPage extends State<FoodScreen> {
+class _FoodScreen extends State<FoodScreen> {
   List<Recipe>? recipesList = [];
   List<Recipe>? foodlist = [];
-  Future<void> fetchAlbum() async {
+
+  Future<void> getFoodProductList() async {
     try {
-      var response = await http.get(Uri.parse('https://dummyjson.com/recipes'));
-      // logger.e('Response status code: ${response.statusCode}');
-      logger.w('Response body: ${response.body}');
-      if (response.statusCode == 200) {
-        Map<String, dynamic> _result = jsonDecode(response.body);
+      Map<String, dynamic> _response =
+          await ApiService.get(slug: ApiConstants.RECIPE_ENDPOINT);
 
-        List<Recipe> dummyrecipeslist =
-            List<Map<String, dynamic>>.from(_result['recipes']).map((item) {
+      List<Recipe> testapi =
+          List<Map<String, dynamic>>.from(_response['recipes']).map(
+        (item) {
           return Recipe.fromJson(item);
-        }).toList();
-        // logger.e(dummyrecipeslist.length);
-        setState(() {
-          recipesList = dummyrecipeslist;
-          foodlist = dummyrecipeslist.reversed.toList();
-        });
-
-        logger.e('First product details: ${recipesList!.length}');
-      } else {
-        throw Exception('Failed to load data: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Failed to load data');
-    }
+        },
+      ).toList();
+      setState(() {
+        recipesList = testapi;
+        foodlist = testapi.reversed.toList();
+      });
+      logger.i(recipesList!.length);
+    } catch (e) {}
   }
+
+  // Future<void> fetchAlbum() async {
+  //   try {
+  //     // logger.e('Response status code: ${response.statusCode}');
+  //     logger.w('Response body: ${response.body}');
+  //     if (response.statusCode == 200) {
+  //       Map<String, dynamic> result = jsonDecode(response.body);
+
+  //       List<Recipe> dummyrecipeslist =
+  //           List<Map<String, dynamic>>.from(result['recipes']).map((item) {
+  //         return Recipe.fromJson(item);
+  //       }).toList();
+  //       // logger.e(dummyrecipeslist.length);
+  //       setState(() {
+  //         recipesList = dummyrecipeslist;
+  //         foodlist = dummyrecipeslist.reversed.toList();
+  //       });
+
+  //       logger.e('First product details: ${recipesList!.length}');
+  //     } else {
+  //       throw Exception('Failed to load data: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    fetchAlbum();
+    getFoodProductList();
   }
 
-  List<Map<String, dynamic>> foodCatogory = [
-    {
-      "title": "Pizza",
-      "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/021/311/734/original/pizza-transparent-background-png.png",
-    },
-    {
-      "title": "Burger",
-      "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/021/952/459/original/free-tasty-hamburger-on-transparent-background-free-png.png",
-    },
-    {
-      "title": "Pasta",
-      "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/027/297/786/original/spaghetti-with-tomato-sauce-and-basil-in-a-plate-isolated-on-white-transparent-background-ai-generate-png.png",
-    },
-    {
-      "title": "Chicken Lollipop",
-      "imgUrl":
-          "https://flybuy.in/wp-content/uploads/2020/03/kisspng-fried-chicken-chicken-lollipop-biryani-buffalo-win-bubbles-chicken-lollipop-foodwifi-5c6b1e5603c478.5773671215505239900154.png",
-    },
-    {
-      "title": "cheese Burger",
-      "imgUrl":
-          "https://upload.wikimedia.org/wikipedia/commons/1/11/Cheeseburger.png",
-    },
-    {
-      "title": "Chicken 65",
-      "imgUrl":
-          "https://b.zmtcdn.com/data/pictures/2/20605842/ac47b1d6f2cb48f49ebef318c2f79bf5.png?fit=around|960:500&crop=960:500;*,*",
-    },
-  ];
-  List<Map<String, dynamic>> catogory = [
-    {
-      "title": "Biriyani",
-      "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/027/144/452/non_2x/delicious-chicken-biryani-isolated-on-transparent-background-png.png",
-    },
-    {
-      "title": "Parotta",
-      "imgUrl":
-          "https://itsbenlifestyle.com/cdn/shop/products/Pu6OdE1nLw.png?v=1701870502",
-    },
-    {
-      "title": "Meals",
-      "imgUrl":
-          "https://i.pinimg.com/originals/6b/3b/6a/6b3b6a6468763725fb1f2672d63bb03a.png",
-    },
-    {
-      "title": "Tandoori",
-      "imgUrl":
-          "https://static.vecteezy.com/system/resources/previews/027/144/459/original/tasty-chicken-tandoori-isolated-on-background-free-png.png",
-    },
-    {
-      "title": "Mutton",
-      "imgUrl":
-          "https://assets-global.website-files.com/6305f7d600c9842969920a58/63ec99466497d41831454344_eCVSXogSApXQscf9GqoBYqpPFKCCQvv7XZXPAaS8NGg.png",
-    },
-    {
-      "title": "Paneer Masala",
-      "imgUrl":
-          "https://assets-global.website-files.com/6305f7d600c9842969920a58/63c77da4294077e86c126f1e_O_ZzNK9FqpGHZE-SxZosKUOvr-Y-0Zi0or5TzEwojGE.png",
-    },
-  ];
   List<Map<String, dynamic>> homebanner = [
     {
       "off": "25% Off",
@@ -154,40 +109,6 @@ class _ListPage extends State<FoodScreen> {
       "positionedColor": const Color(0xFFDDBEFF),
     }
   ];
-  List<Map<String, dynamic>> popularData = [
-    {
-      "title": "Pizza",
-      "description": "Chinese|Thai|seafoods|Indian",
-      "timing": "4.5|4km|30 MIns",
-      "exploretiming": "3.5|1km|25 min",
-      "imgUrl":
-          "https://thumbs.dreamstime.com/b/pizza-rustic-italian-mozzarella-cheese-basil-leaves-35669930.jpg",
-    },
-    {
-      "title": "Cheese Burger",
-      "description": "Indian|Receipe|chick",
-      "timing": "4.6|5km|35 MIns",
-      "exploretiming": "3.7|1km|27 min",
-      "imgUrl":
-          "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42-500x500.jpg",
-    },
-    {
-      "title": "Mutton Chukka",
-      "description": "Indian|Receipe|Mutto",
-      "timing": "4.3|3km|25 MIns",
-      "exploretiming": "4.2|1km|29 min",
-      "imgUrl":
-          "https://beta.theindianclaypot.com/content/images/wp-content/uploads/2019/07/mutton-chops.jpg",
-    },
-    {
-      "title": "Chicken Biriyani",
-      "description": "Indian|Receipe|Biriyani",
-      "timing": "4.5|2km|30 MIns",
-      "exploretiming": "3.2|1km|27 min",
-      "imgUrl":
-          "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-biryani-awadhi-01.jpg",
-    }
-  ];
 
   int currentIndex = 0;
 
@@ -198,7 +119,7 @@ class _ListPage extends State<FoodScreen> {
         body: RefreshIndicator(
           backgroundColor: const Color(0xFFe6470a),
           color: Colors.white,
-          onRefresh: () async => await fetchAlbum(),
+          onRefresh: () async => await getFoodProductList(),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -255,7 +176,7 @@ class _ListPage extends State<FoodScreen> {
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         );

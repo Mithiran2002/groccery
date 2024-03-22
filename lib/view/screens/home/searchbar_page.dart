@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:groccery_app/view/screens/home/food_detail.dart';
+import 'package:groccery_app/view/screens/food/food_detail.dart';
 
 class SearchbarPage extends StatelessWidget {
   List<Map<String, dynamic>> foodCatogory = [

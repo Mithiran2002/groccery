@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:groccery_app/view/screens/_dashboard/food_screen.dart';
-import 'package:groccery_app/view/screens/_dashboard/home_screen.dart';
-import 'package:groccery_app/view/screens/_dashboard/mart_screen.dart';
-import 'package:groccery_app/view/screens/_dashboard/dinein_screen.dart';
-import 'package:groccery_app/view/screens/_dashboard/parcel_service_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/mart_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/home_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/food_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/dinein_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/parcel_service_screen.dart';
+
 
 class DashBoardScreen extends StatefulWidget {
   final int? index;
-  const DashBoardScreen(this.index);
+  const DashBoardScreen(this.index, {super.key});
 
   @override
   State<DashBoardScreen> createState() => _DashBoardScreenState();
@@ -54,7 +55,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               icon: Icon(Icons.home_outlined), label: "Home"),
           BottomNavigationBarItem(
             icon: Icon(Icons.restaurant_menu_outlined),
-            label: "food Page",
+            label: "food",
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.local_grocery_store_outlined), label: "Mart"),

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groccery_app/view/widget/tips_widget.dart';
 import 'package:groccery_app/view/widget/custom_button.dart';
-import 'package:groccery_app/view/screens/home/coupons_page.dart';
+import 'package:groccery_app/view/screens/cart/coupons_page.dart';
 
 class CartPage extends StatelessWidget {
   List<Map<String, dynamic>> chip = [
