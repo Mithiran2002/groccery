@@ -2,10 +2,17 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/view/screens/profile/profile_page.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key});
+  int? userId;
+  String? userName;
+  String? userEmail;
+  String? image;
+  HeaderWidget(
+      {this.userId, this.userName, this.userEmail, this.image, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +24,13 @@ class HeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Deliver Now",
+              "$userName",
               style: TextStyle(fontSize: 12.sp, color: Colors.grey),
             ),
             Row(
               children: [
                 Text(
-                  "Hsr Layout",
+                  "$userEmail",
                   style:
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w900),
                 ),
@@ -43,7 +50,8 @@ class HeaderWidget extends StatelessWidget {
           child: CircleAvatar(
             maxRadius: 20.sp,
             backgroundColor: const Color(0xFFf0f0f1),
-            child: const Icon(Icons.person_2_outlined),
+            backgroundImage: CachedNetworkImageProvider(
+                image ?? "https://robohash.org/Jeanne.png?set=set4"),
           ),
         )
       ],

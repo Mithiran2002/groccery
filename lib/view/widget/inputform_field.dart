@@ -13,7 +13,7 @@ class InputFormField extends StatelessWidget {
   InputFormField(
       {super.key,
       required this.title,
- this.onValidate,
+       this.onValidate,
       this.onTap,
       this.suffixIcon,
       this.readonly,

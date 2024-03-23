@@ -4,23 +4,43 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:groccery_app/view/widget/header_widget.dart';
 import 'package:groccery_app/view/widget/category_card.dart';
 import 'package:groccery_app/view/widget/popular_section.dart';
 import 'package:groccery_app/view/widget/searchbar_widget.dart';
 import 'package:groccery_app/view/widget/home_page_banner.dart';
-import 'package:groccery_app/view/screens/dashboard_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {
   int currentIndex = 0;
-
-  HomeScreen({super.key});
+  final String? username;
+  final String? userEmail;
+  final String? image;
+  HomeScreen({
+    super.key,
+    this.username,
+    this.userEmail,
+    this.image,
+  });
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? userName = "";
+  String? userEmail = "";
+  String? image = "";
+  getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName') ?? 'testname';
+      userEmail = prefs.getString('userEmail') ?? 'useremail.com';
+      image = prefs.getString('image') ?? '';
+    });
+  }
+
   int currentindex = 0;
   List<Map<String, dynamic>> popularData = [
     {
@@ -139,6 +159,11 @@ class _HomeScreenState extends State<HomeScreen> {
       "positionedColor": const Color(0xFFDDBEFF),
     }
   ];
+  @override
+  void initState() {
+    getUserData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,12 +179,15 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding:
                   EdgeInsets.only(left: 3.w, right: 3.w, top: 3.h, bottom: 1.h),
-              child: HeaderWidget(),
+              child: HeaderWidget(
+                userName: userName ?? 'Testname',
+                userEmail: userEmail ?? 'usermail.com',
+              ),
             ),
             Gap(2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
-              child: SearchbarWidget(),
+              child: const SearchbarWidget(),
             ),
             Gap(2.h),
             Padding(

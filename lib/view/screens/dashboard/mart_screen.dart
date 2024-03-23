@@ -154,7 +154,7 @@ class _MartScreenState extends State<MartScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
-                child: const HeaderWidget(),
+                child:  HeaderWidget(),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),

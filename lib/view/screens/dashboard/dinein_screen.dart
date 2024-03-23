@@ -169,7 +169,7 @@ class _DineInScreenState extends State<DineInScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
-                child: const HeaderWidget(),
+                child:  HeaderWidget(),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.w),

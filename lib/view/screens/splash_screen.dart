@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/view/screens/dashboard_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:groccery_app/view/screens/login_screen/login_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/dashboard_screen.dart';
 
 class SpalashScreen extends StatefulWidget {
   @override
@@ -10,13 +12,29 @@ class SpalashScreen extends StatefulWidget {
 }
 
 class _SpalashScreenState extends State<SpalashScreen> {
+  bool isLoggedin = false;
+  isuserLoggedin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isLoggedin = prefs.getBool('isLoggedin') ?? false;
+    });
+    if (isLoggedin) {
+      Timer(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const DashBoardScreen(0)));
+      });
+    } else {
+      Timer(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      });
+    }
+  }
+
   @override
   void initState() {
+    isuserLoggedin();
     super.initState();
-    Timer(const Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const DashBoardScreen(0)));
-    });
   }
 
   @override

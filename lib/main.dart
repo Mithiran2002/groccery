@@ -1,6 +1,7 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:groccery_app/view/screens/home/splash_screen.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:groccery_app/view/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,8 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: SpalashScreen(),
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
       );
     });
   }

@@ -2,10 +2,38 @@ import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:groccery_app/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:groccery_app/view/widget/home_page_banner.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:groccery_app/view/screens/login_screen/login_screen.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  final String? userName;
+
+  ProfilePage({
+    super.key,
+    this.userName,
+  });
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String? userName;
+  String? userEmail;
+  String? image;
+  getuserName() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName')!;
+      userEmail = prefs.getString('userEmail')!;
+      image = prefs.getString('userImage')!;
+    });
+    logger.i(userName);
+  }
+
   List<Map<String, dynamic>> profile = [
     {"text": "My Account", "icon": Icons.person_2_outlined},
     {
@@ -35,10 +63,17 @@ class ProfilePage extends StatelessWidget {
     {
       "text": "Help",
       "icon": Icons.help_outline_rounded,
+    },
+    {
+      "text": "Log out",
+      "icon": Icons.logout_outlined,
     }
   ];
-
-  ProfilePage({super.key});
+  @override
+  void initState() {
+    super.initState();
+    getuserName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +105,14 @@ class ProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sow Mithran",
+                          userName ?? '',
                           style: TextStyle(
                               fontSize: 18.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
-                          "+91 4580694789",
+                          userEmail ?? '',
                           style: TextStyle(
                               fontSize: 10.sp,
                               color: Colors.grey,
@@ -88,9 +123,8 @@ class ProfilePage extends StatelessWidget {
                     CircleAvatar(
                       maxRadius: 25.sp,
                       backgroundColor: const Color(0xFFf0f0f1),
-                      child: Icon(
-                        Icons.person_2_outlined,
-                        size: 25.sp,
+                      backgroundImage: CachedNetworkImageProvider(
+                        image ?? "https://robohash.org/Jeanne.png?set=set4",
                       ),
                     ),
                   ],
@@ -156,23 +190,76 @@ class ProfilePage extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: profile.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(
-                            profile[index]["icon"],
-                            size: 20.sp,
-                            color: Colors.black,
-                          ),
-                          title: Text(
-                            profile[index]["text"],
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 14.sp,
-                            color: Colors.black,
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      backgroundColor: Color(0xFFe6470a),
+                                      title: Text(
+                                        "Logout",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18.sp),
+                                      ),
+                                      alignment: Alignment.center,
+                                      content: Text(
+                                        "Are You Sure?",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14.sp),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              "No",
+                                              style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w600),
+                                            )),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LoginScreen()),
+                                                      (Route<dynamic> route) =>
+                                                          false);
+                                            },
+                                            child: Text("yes",
+                                                style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.w600))),
+                                      ],
+                                    ));
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              profile[index]["icon"],
+                              size: 20.sp,
+                              color: Colors.black,
+                            ),
+                            title: Text(
+                              profile[index]["text"],
+                              style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 14.sp,
+                              color: Colors.black,
+                            ),
                           ),
                         );
                       }),

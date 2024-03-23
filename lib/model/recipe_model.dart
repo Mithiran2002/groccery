@@ -1,20 +1,5 @@
 class Recipe {
-  // int? id;
-  // String? name;
-  // List<String>? ingredients;
-  // List<String>? instructions;
-  // int? prepTimeMinutes;
-  // int? cookTimeMinutes;
-  // int? servings;
-  // String? difficulty;
-  // String? cuisine;
-  // int? caloriesPerServing;
-  // List<String>? tags;
-  // int? userId;
-  // String? image;
-  // int? rating;
-  // int? reviewCount;
-  // List<String>? mealType;
+
   int? id;
   String? name;
   List<String>? ingredients;

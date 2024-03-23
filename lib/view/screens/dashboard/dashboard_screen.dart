@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:groccery_app/view/screens/dashboard/mart_screen.dart';
+import 'package:groccery_app/view/screens/food/food_screen.dart';
 import 'package:groccery_app/view/screens/dashboard/home_screen.dart';
-import 'package:groccery_app/view/screens/dashboard/food_screen.dart';
+import 'package:groccery_app/view/screens/dashboard/mart_screen.dart';
 import 'package:groccery_app/view/screens/dashboard/dinein_screen.dart';
 import 'package:groccery_app/view/screens/dashboard/parcel_service_screen.dart';
-
 
 class DashBoardScreen extends StatefulWidget {
   final int? index;

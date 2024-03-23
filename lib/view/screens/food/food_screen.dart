@@ -46,32 +46,6 @@ class _FoodScreen extends State<FoodScreen> {
     } catch (e) {}
   }
 
-  // Future<void> fetchAlbum() async {
-  //   try {
-  //     // logger.e('Response status code: ${response.statusCode}');
-  //     logger.w('Response body: ${response.body}');
-  //     if (response.statusCode == 200) {
-  //       Map<String, dynamic> result = jsonDecode(response.body);
-
-  //       List<Recipe> dummyrecipeslist =
-  //           List<Map<String, dynamic>>.from(result['recipes']).map((item) {
-  //         return Recipe.fromJson(item);
-  //       }).toList();
-  //       // logger.e(dummyrecipeslist.length);
-  //       setState(() {
-  //         recipesList = dummyrecipeslist;
-  //         foodlist = dummyrecipeslist.reversed.toList();
-  //       });
-
-  //       logger.e('First product details: ${recipesList!.length}');
-  //     } else {
-  //       throw Exception('Failed to load data: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -127,7 +101,7 @@ class _FoodScreen extends State<FoodScreen> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 3.w, vertical: 10.sp),
-                  child: const HeaderWidget(),
+                  child: HeaderWidget(),
                 ),
                 Gap(1.h),
                 Padding(

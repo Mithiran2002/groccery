@@ -18,9 +18,8 @@ var logger = Logger(
 
 class ApiConstants {
   static String BASEURL = 'https://dummyjson.com/';
-  static String RECIPE_ENDPOINT = '/recipes';
+  static String RECIPE_ENDPOINT = 'recipes';
   static String AUTH_ENDPOINT = 'auth/login';
-
-  static String LOGIN_ENDPOINT = '/login';
-  static String COUNT_ENDPOINT = '/count';
+  static String LOGIN_ENDPOINT = 'login';
+  static String COUNT_ENDPOINT = 'count';
 }
