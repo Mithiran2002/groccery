@@ -61,25 +61,25 @@ class ParcelServiceScreenState extends State<ParcelServiceScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "User Name",
+                  "Pickup address",
                   style:
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
                 Gap(1.h),
                 InputFormField(
                   controller: userNameCtr,
-                  title: "Enter User name",
+                  title: "Enter pickup location",
                   onValidate: (value) {
                     if (value!.isNotEmpty) {
                       logger.d(userNameCtr.value.text);
                     } else {
-                      return 'userName is required';
+                      return 'Field should not be empty';
                     }
                   },
                 ),
                 Gap(3.h),
                 Text(
-                  "Password",
+                  " Delivery address",
                   style:
                       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),

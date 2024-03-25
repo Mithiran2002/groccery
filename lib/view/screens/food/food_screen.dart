@@ -31,7 +31,6 @@ class _FoodScreen extends State<FoodScreen> {
     try {
       Map<String, dynamic> _response =
           await ApiService.get(slug: ApiConstants.RECIPE_ENDPOINT);
-
       List<Recipe> testapi =
           List<Map<String, dynamic>>.from(_response['recipes']).map(
         (item) {

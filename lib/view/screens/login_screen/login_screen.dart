@@ -11,7 +11,7 @@ import 'package:groccery_app/view/widget/inputform_field.dart';
 import 'package:groccery_app/view/screens/dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -19,7 +19,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController userCtr = TextEditingController(text: 'kminchelle');
-
   TextEditingController passCtr = TextEditingController(text: '0lelplR');
   Login? result;
   Future<Login?> authLogin(String userName, String password) async {
@@ -86,8 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: "password",
               ),
               Gap(5.h),
-              isLoading
-                  ? const CircularProgressIndicator(
+              isLoading == true
+                  ?   CircularProgressIndicator(
                       color: Colors.red,
                     )
                   : CustomButton(
@@ -103,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 await authLogin(userCtr.text, passCtr.text);
                             if (_result != null) {
                               logger.e(_result.toJson());
-                              await prefs.setInt('userId', _result.id ?? 0);
+                              await prefs.setInt('userId', _result.id);
                               await prefs.setString(
                                   'userName', _result.username);
                               await prefs.setString('userEmail', _result.email);
@@ -124,7 +123,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             BotToast.showText(
                                 contentColor: Colors.red,
                                 text: "Password & Email is Required");
-                                TextStyle(fontSize: 12.sp,color: Colors.white,fontWeight: FontWeight.w400);
+                            TextStyle(
+                                fontSize: 12.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400);
                           }
                         } catch (e) {
                           logger.e(e);

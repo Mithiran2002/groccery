@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      userName = prefs.getString('userName') ?? 'testname';
-      userEmail = prefs.getString('userEmail') ?? 'useremail.com';
+      userName = prefs.getString('userName');
+      userEmail = prefs.getString('userEmail');
       image = prefs.getString('image') ?? '';
     });
   }

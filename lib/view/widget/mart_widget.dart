@@ -19,14 +19,11 @@ class MartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(10.sp),
-        child: CachedNetworkImage(
-          fit: BoxFit.fitWidth,
-          height: 13.h,
-          width: 25.w,
-          imageUrl: imgUrl,
-        ),
+      leading: CachedNetworkImage(
+        fit: BoxFit.fitWidth,
+        height: 13.h,
+        width: 25.w,
+        imageUrl: imgUrl,
       ),
       title: Text(
         title,
@@ -42,7 +39,7 @@ class MartWidget extends StatelessWidget {
             fontSize: 10.sp, fontWeight: FontWeight.w600, color: Colors.grey),
       ),
       trailing: SizedBox(
-        width: 10.w,
+        width: 12.w,
         child: Row(
           children: [
             Icon(

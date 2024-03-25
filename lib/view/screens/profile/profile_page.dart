@@ -1,10 +1,8 @@
 import 'package:gap/gap.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groccery_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:groccery_app/view/widget/home_page_banner.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groccery_app/view/screens/login_screen/login_screen.dart';
 
@@ -148,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF1c2440)),
+                                color: const Color(0xFF1c2440)),
                           ),
                           Gap(0.5.h),
                           Text(
@@ -168,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 2.w, vertical: 0.5.h),
                               child: Text(
-                                "Knowmore",
+                                "Know more",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12.sp),
                               ),
@@ -195,11 +193,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                      backgroundColor: Color(0xFFe6470a),
+                                      backgroundColor: Colors.white,
                                       title: Text(
                                         "Logout",
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 18.sp),
                                       ),
@@ -207,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       content: Text(
                                         "Are You Sure?",
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 14.sp),
                                       ),
@@ -229,7 +227,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   .pushAndRemoveUntil(
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              LoginScreen()),
+                                                              const LoginScreen()),
                                                       (Route<dynamic> route) =>
                                                           false);
                                             },
